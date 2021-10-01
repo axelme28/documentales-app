@@ -1,11 +1,12 @@
-import React from 'react'
-import { IndexRoutes } from './router/index.routes'
+import React from 'react';
+
+import { IndexRoutes } from './router/index.routes';
+import './index.css';
 
 export const App = () => {
-    return (
-        <>
-            <IndexRoutes />
-            <h1>hola</h1>
-        </>
-    )
-}
+	return (
+		<>
+			<IndexRoutes />
+		</>
+	);
+};
