@@ -9,5 +9,5 @@ export const REGISTRAR_DOCUMENTAL = '/registrar-documental';
  * Aqui pertenece los endpoints de la API REST
  */
 
-export const API = 'http://localhost:8080';
+export const API = 'http://localhost:5500';
 export const POST_REGISTRAR_DOCUMENTAL = '/registrar-documentales';
