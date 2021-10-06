@@ -4,7 +4,6 @@ import { Button, Container, FormGroup, Input, Label, Row } from 'reactstrap';
 import useForm from '../hooks/useForm';
 import { compararFechas } from '../helpers/date.helper';
 import { Title, Input as Input2, Label as Label2 } from '../components/index';
-import { request } from '../api/requestClient.api';
 import { _postRegistrarDocumental } from '../api/index.api';
 
 //prettier-ignore
@@ -16,6 +15,7 @@ const inputs = [
     { type: 'text', classInput: 'formulario__input', label: 'Trama', classLabel: 'formulario__label fijar'},
     { type: 'text', classInput: 'formulario__input', label: 'Escritor', classLabel: 'formulario__label fijar'},
     { type: 'number', classInput: 'formulario__input', label: 'Duracion', classLabel: 'formulario__label fijar'},
+	{ type: 'text', classInput: 'formulario__input', label: 'URL',classLabel: 'formulario__label fijar' },
 ]
 
 const optionsClasificacion = ['A', 'AA', 'B15', 'C', 'D'];
@@ -31,7 +31,7 @@ const optionsCategorias = [
 	'Viajes y Aventuras',
 ];
 
-const optionsIdioma = ['Español', 'Ingles'];
+const optionsIdioma = ['Español', 'Ingles', 'Portugues'];
 
 const optionsPais = ['Mexico', 'USA'];
 
@@ -42,18 +42,20 @@ const initialState = {
 	Duracion: '',
 	Elenco: '',
 	Escritor: '',
-	Fecha_lanzamiento: '',
+	Fecha_Lanzamiento: '',
 	Idioma: '',
 	Pais_origen: '',
 	Productor: '',
 	Trama: '',
 	Nombre: '',
+	URL:'',
 };
 
 export const RegistrarScreen = () => {
 	const [values, handleInputChange, reset] = useForm(initialState);
 
 	const handleContinue = async () => {
+		console.log(values);
 		if (compararFechas(values.FechaLanzamiento)) {
 			alert('Fecha invalida');
 			return;
@@ -99,8 +101,8 @@ export const RegistrarScreen = () => {
 					<Input2
 						type={'date'}
 						className={'formulario__input'}
-						name={'Fecha_lanzamiento'}
-						value={values.Fecha_lanzamiento}
+						name={'Fecha_Lanzamiento'}
+						value={values.Fecha_Lanzamiento}
 						onChange={handleInputChange}
 					/>
 					<Label2
@@ -108,6 +110,7 @@ export const RegistrarScreen = () => {
 						className={''}
 						style={{ position: 'absolute', top: -26 }}
 					/>
+				
 				</div>
 				<FormGroup>
 					<Label>Clasificación</Label>
