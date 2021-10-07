@@ -1,32 +1,42 @@
 import React from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { NavLink , Link} from 'react-router-dom';
+import { DOCUMENTALES_VIEW, REGISTRAR_DOCUMENTAL } from '../constants/routes.constants';
 
 const Header = () => {
 	return (
-		<div
-			style={{
-				border: '1px solid #007bff',
-			}}
+		<nav className="navbar navbar-expand-sm navbar-dark bg-dark p-3">
+            
+		<Link 
+			className="navbar-brand" 
+			to="/"
 		>
-			<p>List Based</p>
-			<Nav>
-				<NavItem>
-					<NavLink href='#'>Link</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink href='#'>Link</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink href='#'>Another Link</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink disabled href='#'>
-						Disabled Link
-					</NavLink>
-				</NavItem>
-			</Nav>
+			Documentales
+		</Link>
+
+		<div className="navbar-collapse">
+			<div className="navbar-nav">
+
+				<NavLink 
+					activeClassName="active"
+					className="nav-item nav-link" 
+					exact
+					to= {DOCUMENTALES_VIEW}
+				>
+					Ver Documentales
+				</NavLink>
+
+				<NavLink 
+					activeClassName="active"
+					className="nav-item nav-link" 
+					exact
+					to={REGISTRAR_DOCUMENTAL}
+				>
+					Registrar Documental
+				</NavLink>
+			</div>
 		</div>
-	);
+	</nav>
+)
 };
 
 export default Header;
