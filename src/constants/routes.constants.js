@@ -11,3 +11,6 @@ export const REGISTRAR_DOCUMENTAL = '/registrar-documental';
 
 export const API = 'http://localhost:5500';
 export const POST_REGISTRAR_DOCUMENTAL = '/registrar-documentales';
+
+
+export const GET_VER_DOCUMENTALES = '/ver-documentales';
