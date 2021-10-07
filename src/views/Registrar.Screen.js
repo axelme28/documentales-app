@@ -3,9 +3,11 @@ import { Button, Container, FormGroup, Input, Label, Row } from 'reactstrap';
 
 import useForm from '../hooks/useForm';
 import { compararFechas } from '../helpers/date.helper';
-import { Title, Input as Input2, Label as Label2 } from '../components/index';
+import { Title } from '../components/index';
 import { _postRegistrarDocumental } from '../api/index.api';
 import MainLayout from '../layout/MainLayout';
+import Swal from 'sweetalert2';
+import { MovingTitle } from '../components/MovingTitle';
 
 //prettier-ignore
 const inputs = [
@@ -65,27 +67,34 @@ export const RegistrarScreen = () => {
 		try {
 			const data = await _postRegistrarDocumental(values);
 			if (data.msg) {
-				alert('Se ha creado con éxito el documental en la base de datos');
+				// alert('Se ha creado con éxito el documental en la base de
+				
+				Swal.fire(
+					'!Documental Registrado!',
+					 values.Nombre,
+					'success'
+					);
 				reset();
-				document.getElementsByTagName('form').forEach().reset();
-				//TODO: redireccionar a la vista de ver documentales
+				window.location.reload();
 			} else {
-				alert('Ha ocurrido un error al crear el documental, intenta de nuevo');
+				// alert('Ha ocurrido un error al crear el documental, intenta de nuevo');
+				Swal.fire({
+					icon: 'error',
+					title: 'Hubo un error',
+					text: 'No se pudo eliminar el proyecto, intenta más tarde',
+				})
 			}
 		} catch (error) {
 			console.error(error);
-			alert('Ha ocurrido un error, intenta mas tarde');
+			// alert('Ha ocurrido un error, intenta mas tarde');
+			
 		}
 	};
 
 	return (
 		<MainLayout>
 			<form className='formulario mb-5 pb-5'>
-				<Title
-					title='REGISTRO de DOCUMENTALES'
-					className='formulario__titulo pb-5'
-				/>
-
+				<MovingTitle title = 'Registrar Documental'/>
 				<div className='d-flex flex-wrap justify-content-between'>
 					{inputs.map(input => (
 						<FormGroup className='m-2'>

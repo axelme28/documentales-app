@@ -3,18 +3,9 @@ import DataTable from 'react-data-table-component';
 import { NotFound } from '../components';
 import { _verDocumentales } from '../api/index.api';
 import { Container, Row } from 'reactstrap';
+import MainLayout from '../layout/MainLayout';
+import { Loading } from '../components/Loading';
 
-// "Fecha_lanzamiento": "2000-05-02",
-// "Elenco": "uriel",
-// "Duracion": 120,
-// "Trama": "Uriel siempre llega tarde",
-// "Productor": "axel",
-// "Escritor": "jonnas",
-// "categoria": "bélicos",
-// "Clasificacion": "B",
-// "Idioma": "Espanol",
-// "Pais": "Mexico",
-// "director": "aletz"
 const columnsDataTable = [
 	{ name: 'Nombre', selector: row => row.Nombre, sortable: true },
 	{ name: 'Fecha_Lanzamiento', selector: row => row.Fecha_lanzamiento, sortable: true },
@@ -37,42 +28,57 @@ const optionsPagination = {
 };
 
 const DocumentalesScreen = () => {
+	const [loading, setLoading] = useState(false);
+
 	const [documentales, setDocumentales] = useState([]);
 
-	useEffect(() => {obtenerDocumentales()}, []);
+	useEffect(() => {
+		obtenerDocumentales();
+	}, []);
 
 	const obtenerDocumentales = async () => {
 		try {
+			setLoading(true);
 			const _documentales = await _verDocumentales();
 			setDocumentales(_documentales);
+			setLoading(false);
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
 	return (
-		<> 	
-			<Container style={{height:600}} className="d-flex justify-content-center align-items-center">
+		<>
+			<MainLayout />
+			<Container
+				style={{ height: 600 }}
+				className='d-flex justify-content-center align-items-center'
+			>
 				<Row>
-			 <  DataTable //se conoce como props o propiedades de los 
-						// clearSelectedRows={clear}
-						columns={columnsDataTable}
-						// customStyles={styles.dataTable}
-						data={documentales}
-						dense//ser comprimidas
-						fixedHeader
-						highlightOnHover//sombrear datos
-						noDataComponent={<NotFound />}//pinta si no encuentra nada
-						//onSelectedRowsChange={handleRow} //genera radiobuton 
-						pagination
-						paginationComponentOptions={optionsPagination}
-						responsive// ajustar a cualquier tipo de pantalla
-						//seleccionableRowsNoSelectAll
-						//selectableRows
-						//selectableRowsComponent={RadioButton}
-						striped//filas de diferentes colores 
-					/>
-				</Row>	
-			 </Container>
+					{loading ? (
+						<Loading />
+					) : (
+						<DataTable //se conoce como props o propiedades de los
+							// clearSelectedRows={clear}
+							columns={columnsDataTable}
+							// customStyles={styles.dataTable}
+							data={documentales}
+							dense //ser comprimidas
+							fixedHeader
+							highlightOnHover //sombrear datos
+							noDataComponent={<NotFound />} //pinta si no encuentra nada
+							//onSelectedRowsChange={handleRow} //genera radiobuton
+							pagination
+							paginationComponentOptions={optionsPagination}
+							responsive // ajustar a cualquier tipo de pantalla
+							//seleccionableRowsNoSelectAll
+							//selectableRows
+							//selectableRowsComponent={RadioButton}
+							striped //filas de diferentes colores
+						/>
+					)}
+				</Row>
+			</Container>
 		</>
 	);
 };

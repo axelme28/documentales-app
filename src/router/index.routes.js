@@ -17,7 +17,7 @@ export const IndexRoutes = () => {
 						path={REGISTRAR_DOCUMENTAL}
 						component={RegistrarScreen}
 					/>
-					<Redirect to={REGISTRAR_DOCUMENTAL} />
+					<Redirect to={DOCUMENTALES_VIEW} />
 				</Switch>
 			</BrowserRouter>
 		</>
