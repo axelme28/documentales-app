@@ -5,6 +5,7 @@ import useForm from '../hooks/useForm';
 import { compararFechas } from '../helpers/date.helper';
 import { Title, Input as Input2, Label as Label2 } from '../components/index';
 import { _postRegistrarDocumental } from '../api/index.api';
+import MainLayout from '../layout/MainLayout';
 
 //prettier-ignore
 const inputs = [
@@ -48,7 +49,7 @@ const initialState = {
 	Productor: '',
 	Trama: '',
 	Nombre: '',
-	URL:'',
+	URL: '',
 };
 
 export const RegistrarScreen = () => {
@@ -78,98 +79,107 @@ export const RegistrarScreen = () => {
 	};
 
 	return (
-		<>
+		<MainLayout>
 			<form className='formulario mb-5 pb-5'>
 				<Title
 					title='REGISTRO de DOCUMENTALES'
 					className='formulario__titulo pb-5'
 				/>
 
-				{inputs.map(input => (
-					<>
-						<Input2
-							type={input.type}
-							className={input.classInput}
-							onChange={handleInputChange}
-							name={input.label}
-							value={values[input.label]}
-						/>
-						<Label2 label={input.label} className={input.classLabel} />
-					</>
-				))}
-				<div style={{ position: 'relative' }}>
-					<Input2
-						type={'date'}
-						className={'formulario__input'}
-						name={'Fecha_Lanzamiento'}
-						value={values.Fecha_Lanzamiento}
-						onChange={handleInputChange}
-					/>
-					<Label2
-						label={'Fecha de Lanzamiento'}
-						className={''}
-						style={{ position: 'absolute', top: -26 }}
-					/>
-				
+				<div className='d-flex flex-wrap justify-content-between'>
+					{inputs.map(input => (
+						<FormGroup className='m-2'>
+							<Label>{input.label}</Label>
+							<Input
+								name={input.label}
+								onChange={handleInputChange}
+								type={input.type}
+								value={values[input.label]}
+							/>
+						</FormGroup>
+					))}
 				</div>
-				<FormGroup>
-					<Label>Clasificación</Label>
-					<Input
-						type='select'
-						name='Clasificacion'
-						onChange={handleInputChange}
-					>
-						<option selected disabled>
-							Selecciona una clasificación
-						</option>
-						<option>A</option>
-						{optionsClasificacion.map(clasificacion => (
-							<option key={clasificacion}>{clasificacion}</option>
-						))}
-					</Input>
-				</FormGroup>
-				<FormGroup>
-					<Label>Categoría</Label>
-					<Input type='select' name='Categoria' onChange={handleInputChange}>
-						<option selected disabled>
-							Selecciona una categoría
-						</option>
-						{optionsCategorias.map(categoria => (
-							<option key={categoria}>{categoria}</option>
-						))}
-					</Input>
-				</FormGroup>
-				<FormGroup>
-					<Label>Idioma</Label>
-					<Input type='select' name='Idioma' onChange={handleInputChange}>
-						<option selected disabled>
-							Selecciona una categoría
-						</option>
-						{optionsIdioma.map(idioma => (
-							<option key={idioma}>{idioma}</option>
-						))}
-					</Input>
-				</FormGroup>
-				<FormGroup>
-					<Label>País de Origen</Label>
-					<Input type='select' name='Pais_origen' onChange={handleInputChange}>
-						<option selected disabled>
-							Selecciona una categoría
-						</option>
-						{optionsPais.map(pais => (
-							<option key={pais}>{pais}</option>
-						))}
-					</Input>
-				</FormGroup>
+				<div className='d-flex justify-content-between mt-3'>
+					<FormGroup style={{ width: 200 }}>
+						<Label>Fecha de Lanzamiento</Label>
+						<Input
+							name={'Fecha_Lanzamiento'}
+							onChange={handleInputChange}
+							type={'date'}
+							value={values.Fecha_Lanzamiento}
+						/>
+					</FormGroup>
+
+					<FormGroup style={{ width: 200 }}>
+						<Label>Clasificación</Label>
+						<Input
+							type='select'
+							name='Clasificacion'
+							onChange={handleInputChange}
+						>
+							<option selected disabled>
+								Selecciona una clasificación
+							</option>
+							<option>A</option>
+							{optionsClasificacion.map(clasificacion => (
+								<option key={clasificacion}>{clasificacion}</option>
+							))}
+						</Input>
+					</FormGroup>
+					<FormGroup style={{ width: 200 }}>
+						<Label>Categoría</Label>
+						<Input
+							type='select'
+							name='Categoria'
+							onChange={handleInputChange}
+						>
+							<option selected disabled>
+								Selecciona una categoría
+							</option>
+							{optionsCategorias.map(categoria => (
+								<option key={categoria}>{categoria}</option>
+							))}
+						</Input>
+					</FormGroup>
+				</div>
+				<div className='d-flex justify-content-between mt-3'>
+					<FormGroup style={{ width: 200 }}>
+						<Label>Idioma</Label>
+						<Input type='select' name='Idioma' onChange={handleInputChange}>
+							<option selected disabled>
+								Selecciona una categoría
+							</option>
+							{optionsIdioma.map(idioma => (
+								<option key={idioma}>{idioma}</option>
+							))}
+						</Input>
+					</FormGroup>
+
+					<FormGroup style={{ width: 200 }}>
+						<Label>País de Origen</Label>
+						<Input
+							type='select'
+							name='Pais_origen'
+							onChange={handleInputChange}
+						>
+							<option selected disabled>
+								Selecciona una categoría
+							</option>
+							{optionsPais.map(pais => (
+								<option key={pais}>{pais}</option>
+							))}
+						</Input>
+					</FormGroup>
+				</div>
 			</form>
 
-			<Container className='mb-5 pb-5'>
+			<Container className='mb-2 pb-2'>
 				<Row className='d-flex justify-content-center'>
 					<Button color='success' size='lg' onClick={handleContinue}>
 						Registrar Documental
 					</Button>
 				</Row>
 			</Container>
-		</>
+		</MainLayout>
 	);
 };
