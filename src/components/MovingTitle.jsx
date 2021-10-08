@@ -1,18 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-export const MovingTitle = ({title = ''}) => {
-    
-    return (
-        <>
-            <h1 className="ml6">
-            <span className="text-wrapper">
-                <span className="letters">{title}</span>
-            </span>
-            </h1>
+export const MovingTitle = ({ title = '' }) => {
+	return (
+		<>
+			<h1 className='ml6 text-center'>
+				<span className='text-wrapper'>
+					<span className='letters'>{title}</span>
+				</span>
+			</h1>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js">
-            
-                {/* var textWrapper = document.querySelector('.ml6 .letters');
+			<script src='https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js'>
+				{/* var textWrapper = document.querySelector('.ml6 .letters');
                 textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
             
                 anime.timeline({loop: true})
@@ -29,8 +27,7 @@ export const MovingTitle = ({title = ''}) => {
                     easing: "easeOutExpo",
                     delay: 1000
                 }) */}
-            </script>  
-             
-        </>
-    )
-}
+			</script>
+		</>
+	);
+};
