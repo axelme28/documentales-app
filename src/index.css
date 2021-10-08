@@ -7,6 +7,7 @@ body {
 
 button {
 	outline: none !important;
+	box-shadow: none !important;
 }
 
 .formulario {
@@ -154,4 +155,43 @@ button {
 		-webkit-transform: scale3D(0, 0, 1);
 		transform: scale3D(0, 0, 1);
 	}
+}
+
+.swal2-styled.swal2-confirm {
+	font-family: 'Roboto', sans-serif;
+	box-shadow: none !important;
+	border: 0;
+	border-radius: 0.25em;
+	background: initial;
+	background-color: #28a744;
+	color: #fff;
+	font-size: 1em;
+	width: 80px;
+	outline: none;
+}
+
+.swal2-styled.swal2-deny {
+	font-family: 'Roboto', sans-serif;
+	box-shadow: none !important;
+	border: 0;
+	border-radius: 0.25em;
+	background: initial;
+	background-color: #ea5455;
+	color: #fff;
+	font-size: 1em;
+	width: 80px;
+	outline: none;
+}
+.swal2-title {
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	max-width: 100%;
+	margin: 0;
+	padding: 0.8em 1em 0;
+	color: #595959;
+	font-size: 1.875em;
+	font-weight: 600;
+	text-align: center;
+	text-transform: none;
+	word-wrap: break-word;
 }
