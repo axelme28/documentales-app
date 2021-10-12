@@ -11,14 +11,7 @@ const Header = () => {
 
 			<div className='navbar-collapse'>
 				<div className='navbar-nav'>
-					<NavLink
-						activeClassName='active'
-						className='nav-item nav-link'
-						exact
-						to={DOCUMENTALES_VIEW}
-					>
-						Ver Documentales
-					</NavLink>
+					
 
 				<NavLink 
 					activeClassName="active"

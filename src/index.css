@@ -195,3 +195,8 @@ button {
 	text-transform: none;
 	word-wrap: break-word;
 }
+
+.css-1vhaqj4-MuiButtonBase-root-MuiButton-root{
+	background-color: #28a745 !important;
+	border-color: #28a745 !important;
+}

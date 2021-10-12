@@ -1,10 +1,15 @@
 import React from 'react';
 import { Header } from '../components';
+import { useLocation } from 'react-router-dom';
+import { LOG_IN } from '../constants/routes.constants';
 
 const MainLayout = ({ children }) => {
+	let location = useLocation();
+
 	return (
 		<>
-			<Header />
+			{location.pathname === LOG_IN ? null : <Header />}
+
 			{children}
 		</>
 	);

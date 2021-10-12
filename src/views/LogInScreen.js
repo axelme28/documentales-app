@@ -12,12 +12,14 @@ import Grid from '@mui/material/Grid';
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LoginImage from '../assets/imgs/headphones-g67bdc9328_1920.jpg'
+
 
 export const LoginScreen = ({history}) => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        history.replace('/'); 
+        history.replace('/documentales'); 
     }
     
     const theme = createTheme();
@@ -34,12 +36,10 @@ export const LoginScreen = ({history}) => {
             sm={4}
             md={7}
             sx={{
-                backgroundImage: 'url(https://source.unsplash.com/random)',
+                backgroundImage: `url(${LoginImage})`,
                 backgroundRepeat: 'no-repeat',
-                backgroundColor: (t) =>
-                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
                 backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundPosition: 'center'
             }}
             />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -87,7 +87,7 @@ export const LoginScreen = ({history}) => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }} 
+                    sx={{ mt: 3, mb: 2 }}
                     onClick = {handleSubmit}
                 >
                     Sign In
@@ -112,3 +112,4 @@ export const LoginScreen = ({history}) => {
         </ThemeProvider>
     );
     }
+
