@@ -89,6 +89,7 @@ export const RegistrarScreen = () => {
 
 	return (
 		<>
+			
 			<form className='formulario mb-3 pb-3'>
 				<Title title='Registrar Documental' className='formulario__titulo' />
 				<div>
