@@ -4,7 +4,7 @@
 
 export const DOCUMENTALES_VIEW = '/documentales';
 export const REGISTRAR_DOCUMENTAL = '/registrar-documental';
-
+export const LOG_IN = '/login'
 /*
  * Aqui pertenece los endpoints de la API REST
  */

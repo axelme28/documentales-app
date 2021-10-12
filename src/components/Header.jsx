@@ -33,8 +33,21 @@ const Header = () => {
 				>
 					Registrar Documental
 				</NavLink>
+				</div>
+            </div>
+				<div className="ml-2">
+                <ul className="navbar-nav ">
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/login"
+                    >
+                        Logout
+                    </NavLink>
+				</ul>
 			</div>
-		</div>
+			
 	</nav>
 )
 };
