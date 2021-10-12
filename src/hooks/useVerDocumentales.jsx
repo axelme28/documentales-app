@@ -71,17 +71,23 @@ const useVerDocumentales = () => {
 	};
 
 	const columnsDataTable = [
-		{ name: 'Nombre', selector: row => row.Nombre, sortable: true },
+		{
+			name: 'Nombre',
+			selector: row => <p className='m-0 text-wrap text-center'>{row.Nombre}</p>,
+			sortable: true,
+			width: '10rem',
+		},
 		{
 			name: 'Fecha Lanzamiento',
 			selector: row => formateDate(row.Fecha_lanzamiento),
 			sortable: true,
+			width: '8.5rem',
 		},
-		{ name: 'Elenco', selector: row => row.Elenco, sortable: true },
-		{ name: 'Duración', selector: row => row.Duracion, sortable: true },
+		// { name: 'Elenco', selector: row => row.Elenco, sortable: true },
 		{ name: 'Trama', selector: row => row.Trama, sortable: true },
 		{ name: 'Productor', selector: row => row.Productor, sortable: true },
 		{ name: 'Escritor', selector: row => row.Escritor, sortable: true },
+		{ name: 'Duración', selector: row => row.Duracion, sortable: true },
 		{ name: 'Categoría', selector: row => row.categoria, sortable: true },
 		{ name: 'Clasificación', selector: row => row.Clasificacion, sortable: true },
 		{ name: 'Idioma', selector: row => row.Idioma, sortable: true },

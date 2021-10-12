@@ -74,7 +74,7 @@ export const RegistrarScreen = () => {
 				Swal.fire({
 					icon: 'error',
 					title: 'Hubo un error',
-					text: 'No se pudo eliminar el proyecto, intenta más tarde',
+					text: 'No se pudo registrar el proyecto, intenta más tarde',
 				});
 			}
 		} catch (error) {
@@ -82,7 +82,7 @@ export const RegistrarScreen = () => {
 			Swal.fire({
 				icon: 'error',
 				title: 'Hubo un error',
-				text: 'No se pudo eliminar el proyecto, intenta más tarde',
+				text: 'No se pudo registrar el proyecto, intenta más tarde',
 			});
 		}
 	};
