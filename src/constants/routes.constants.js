@@ -13,3 +13,4 @@ export const API = 'http://localhost:8080';
 export const POST_REGISTRAR_DOCUMENTAL = '/registrar-documentales';
 export const GET_VER_DOCUMENTALES = '/ver-documentales';
 export const DELETE_DOCUMENTAL = '/eliminar-documental';
+export const INICIAR_SECION = '/log-in';
