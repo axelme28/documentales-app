@@ -1,6 +1,6 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
-import { Col, Container, Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 
 import { NotFound } from '../components';
 import { Loading } from '../components/Loading';
