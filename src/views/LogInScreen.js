@@ -10,6 +10,7 @@ import {
 
 import LoginImage from '../assets/imgs/headphones-g67bdc9328_1920.jpg';
 import { DOCUMENTALES_VIEW } from '../constants/routes.constants';
+import { _iniciarSecion } from '../api/index.api';
 
 const initialStateLogin = {
 	email: '',
@@ -21,12 +22,7 @@ const initialStateError = {
 	msg: '',
 };
 
-const User = {
-	email: 'correo@correo.com',
-	password: '12345',
-};
-
-export const LoginScreen = ({ history }) => {
+export const LoginScreen =  ({ history }) => {
 	const [login, setLogin] = useState(initialStateLogin);
 	const [error, setError] = useState(initialStateError);
 	const [captcha, setCaptcha] = useState('');
@@ -43,7 +39,7 @@ export const LoginScreen = ({ history }) => {
 		setCaptcha(value);
 	};
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
 		try {
 			if (login.email === '' || login.password === '') {
@@ -60,23 +56,22 @@ export const LoginScreen = ({ history }) => {
 					msg: 'El captcha capturado no es correcto, intenta de nuevo.',
 				});
 				return;
-			}
+			}   
 
-			//TODO: validar usuarios en base de datos BACKEND
-			// const userOk = llamado a API
-			const validate = handleValidateLogin(User, login);
+            const data = await _iniciarSecion(login);
+			// const validate = handleValidateLogin(data, login);
 
-			if (validate) {
+			// if (validate) {
 				history.push(DOCUMENTALES_VIEW);
-				return;
-			}
+			// 	return;
+			// }
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
 	const handleValidateLogin = (User = {}, login = {}) => {
-		const { email, password } = User;
+		 const { email, password } = User;
 
 		if (login.email !== email) {
 			setError({
