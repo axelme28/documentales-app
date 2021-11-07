@@ -11,6 +11,9 @@ import DocumentalesScreen from '../views/Documentales.Screen';
 import { LoginScreen } from '../views/LogInScreen';
 import MainLayout from '../layout/MainLayout';
 import { RegistrarAdmiscreen } from '../views/RegistrarAdmi.screen';
+import { RegistroAlum } from '../views/RegistroAlum.screen';
+import { RegistroProfescreen } from '../views/RegistroProfe.screen';
+import { RegistroUniscreen } from '../views/RegistroUni.screen';
 
 export const IndexRoutes = () => {
 	return (
@@ -38,6 +41,25 @@ export const IndexRoutes = () => {
 									 component = {RegistrarAdmiscreen}
 									 />
 
+                           <Route
+							     	exact
+									 path = "/prueba1" 
+									 component = { RegistroAlum}
+									 />
+
+                            <Route
+							     	exact
+									 path = "/prueba2" 
+									 component = { RegistroProfescreen}
+									 />
+
+                            <Route
+							     	exact
+									 path = "/prueba3" 
+									 component = {RegistroUniscreen}
+									 />
+
+
 							{/* <Redirect path={LOG_IN} /> */}
 						</>
 					</MainLayout>
@@ -45,4 +67,5 @@ export const IndexRoutes = () => {
 			</BrowserRouter>
 		</>
 	);
+
 };

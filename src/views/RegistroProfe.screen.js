@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import useForm from '../hooks/useForm';
-import adminImg from '../assets/imgs/admin.png';
+import adminImg from '../assets/imgs/profesor.png';
 
-export const RegistrarAdmiscreen = () => {
+export const RegistroProfescreen = () => {
 	const { values, handleChange } = useForm('');
 	return (
 		<>
@@ -13,7 +13,7 @@ export const RegistrarAdmiscreen = () => {
 					<div style={{ marginTop: 50 }}>
 						<Box sx={styles.box}>
 							<Typography component='h1' variant='h5'>
-								Registrar Administrador
+								Registrar Profesor 
 							</Typography>
 							<div className='d-flex justify-content-between'>
 								<Box
@@ -48,12 +48,12 @@ export const RegistrarAdmiscreen = () => {
 										onChange={handleChange}
 									/>
 									
-                                    <TextField
+									<TextField
 										fullWidth
-										id='email'
-										label='Email'
+										id='noTrabajador'
+										label='No.Trabajador'
 										margin='normal'
-										name='email'
+										name='noTrabajador'
 										required
 										type='text'
 										onChange={handleChange}
@@ -61,12 +61,12 @@ export const RegistrarAdmiscreen = () => {
 
 									<TextField
 										fullWidth
-										id='direccion'
-										label='Direccion'
+										id='fechaNacimiento'
+										label='Fecha de Nacimiento'
 										margin='normal'
-										name='direccion'
+										name='fechaNacimiento'
 										required
-										type='text'
+										type='date'
 										onChange={handleChange}
 									/>
 								</Box>
@@ -87,18 +87,16 @@ export const RegistrarAdmiscreen = () => {
 										type='text'
 										onChange={handleChange}
 									/>
-
-									<TextField
+                                    <TextField
 										fullWidth
-										id='telefono'
-										label='Telefono '
+										id='email'
+										label='Email'
 										margin='normal'
-										name='telefono'
+										name='email'
 										required
 										type='text'
 										onChange={handleChange}
 									/>
-
 									<TextField
 										autoComplete='current-password'
 										fullWidth
