@@ -10,6 +10,7 @@ import { RegistrarScreen } from '../views/Registrar.Screen';
 import DocumentalesScreen from '../views/Documentales.Screen';
 import { LoginScreen } from '../views/LogInScreen';
 import MainLayout from '../layout/MainLayout';
+import { RegistrarAdmiscreen } from '../views/RegistrarAdmi.screen';
 
 export const IndexRoutes = () => {
 	return (
@@ -30,6 +31,12 @@ export const IndexRoutes = () => {
 								component={RegistrarScreen}
 							/>
 							<Route exact path={LOG_IN} component={LoginScreen} />
+
+							<Route
+							     	exact
+									 path = "/prueba" 
+									 component = {RegistrarAdmiscreen}
+									 />
 
 							{/* <Redirect path={LOG_IN} /> */}
 						</>

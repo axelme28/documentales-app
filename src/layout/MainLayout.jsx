@@ -8,7 +8,7 @@ const MainLayout = ({ children }) => {
 
 	return (
 		<>
-			{location.pathname === LOG_IN ? null : <Header />}
+			{(location.pathname === LOG_IN || location.pathname === '/prueba')? null : <Header />}
 
 			{children}
 		</>
