@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import useForm from '../hooks/useForm';
-import adminImg from '../assets/imgs/admin.png';
+import adminImg from '../assets/imgs/universidad.png';
 
-export const RegistrarAdmiscreen = () => {
+export const RegistroUniscreen = () => {
 	const { values, handleChange } = useForm('');
 	return (
 		<>
@@ -13,7 +13,7 @@ export const RegistrarAdmiscreen = () => {
 					<div style={{ marginTop: 50 }}>
 						<Box sx={styles.box}>
 							<Typography component='h1' variant='h5'>
-								Registrar Administrador
+								Registro de Universidades
 							</Typography>
 							<div className='d-flex justify-content-between'>
 								<Box
@@ -26,10 +26,10 @@ export const RegistrarAdmiscreen = () => {
 										autoComplete='name'
 										autoFocus
 										fullWidth
-										id='nombre'
-										label='Nombre'
+										id='universidad'
+										label='Universidad'
 										margin='normal'
-										name='nombre'
+										name='universidad'
 										required
 										type='text'
 										onChange={handleChange}
@@ -39,98 +39,39 @@ export const RegistrarAdmiscreen = () => {
 
 									<TextField
 										fullWidth
-										id='materno'
-										label='Apellido Materno'
+										id='nombre'
+										label='Nombre'
 										margin='normal'
-										name='materno'
+										name='nombre'
 										required
 										type='text'
 										onChange={handleChange}
 									/>
 									
-                                    <TextField
-										fullWidth
-										id='email'
-										label='Email'
-										margin='normal'
-										name='email'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-
 									<TextField
 										fullWidth
-										id='direccion'
-										label='Direccion'
+										id='codigo'
+										label='Codigo'
 										margin='normal'
-										name='direccion'
+										name='codigo'
 										required
 										type='text'
 										onChange={handleChange}
 									/>
-								</Box>
 
+								
+								</Box>
+							</div>
+
+
+							<div className='d-flex justify-content-between'>
 								<Box
 									component='form'
 									noValidate
 									onSubmit={() => {}}
 									sx={{ mt: 1, mx: 2 }}
-								>
-									 <TextField
-										fullWidth
-										id='paterno'
-										label='Apellido Paterno'
-										margin='normal'
-										name='paterno'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-
-									<TextField
-										fullWidth
-										id='telefono'
-										label='Telefono '
-										margin='normal'
-										name='telefono'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-
-									<TextField
-										autoComplete='current-password'
-										fullWidth
-										id='password'
-										label='Contraseña'
-										margin='normal'
-										name='password'
-										required
-										type='password'
-										onChange={handleChange}
-									/>
-
-									<TextField
-										fullWidth
-										id='universidad'
-										label='Universidad'
-										margin='normal'
-										name='universidad'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-								</Box>
-							</div>
-
-							<Box
-								component='form'
-								noValidate
-								onSubmit={() => {}}
-								sx={{ mt: 1 }}
-							>
-								<Button
+							     >
+							    <Button
 									type='submit'
 									fullWidth
 									variant='contained'
@@ -140,7 +81,33 @@ export const RegistrarAdmiscreen = () => {
 								>
 									Guardar
 								</Button>
-							</Box>
+								</Box>
+
+
+								<Box
+									component='form'
+									noValidate
+									onSubmit={() => {}}
+									sx={{ mt: 1, mx: 2 }}
+							     >
+							
+								<Button
+									type='submit'
+									fullWidth
+									variant='contained'
+									sx={{ mt: 5, mb: 2, backgroundColor: '#556169' }}
+									size='large'
+									onClick={() => {}}
+								>
+									Cerrar
+								</Button>
+								 </Box>								
+								
+							</div>
+
+							
+							
+							
 						</Box>
 					</div>
 				</Grid>

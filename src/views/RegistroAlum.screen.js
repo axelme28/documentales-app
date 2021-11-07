@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import useForm from '../hooks/useForm';
-import adminImg from '../assets/imgs/admin.png';
+import adminImg from '../assets/imgs/alumno.png';
 
-export const RegistrarAdmiscreen = () => {
+export const RegistroAlum = () => {
 	const { values, handleChange } = useForm('');
 	return (
 		<>
@@ -13,7 +13,7 @@ export const RegistrarAdmiscreen = () => {
 					<div style={{ marginTop: 50 }}>
 						<Box sx={styles.box}>
 							<Typography component='h1' variant='h5'>
-								Registrar Administrador
+								Registrar Alumno
 							</Typography>
 							<div className='d-flex justify-content-between'>
 								<Box
@@ -23,7 +23,6 @@ export const RegistrarAdmiscreen = () => {
 									sx={{ mt: 1, mx: 2 }}
 								>
 								    <TextField
-										autoComplete='name'
 										autoFocus
 										fullWidth
 										id='nombre'
@@ -47,7 +46,7 @@ export const RegistrarAdmiscreen = () => {
 										type='text'
 										onChange={handleChange}
 									/>
-									
+                                    
                                     <TextField
 										fullWidth
 										id='email'
@@ -90,10 +89,10 @@ export const RegistrarAdmiscreen = () => {
 
 									<TextField
 										fullWidth
-										id='telefono'
-										label='Telefono '
+										id='boleta'
+										label='Boleta '
 										margin='normal'
-										name='telefono'
+										name='boleta'
 										required
 										type='text'
 										onChange={handleChange}
