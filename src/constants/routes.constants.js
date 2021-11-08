@@ -5,6 +5,10 @@
 export const DOCUMENTALES_VIEW = '/documentales';
 export const REGISTRAR_DOCUMENTAL = '/registrar-documental';
 export const LOG_IN = '/login'
+export const REGISTRAR_ADMINISTRADOR ='/registrar-administrador'
+export const REGISTRAR_ALUMNOS ='/registrar-alumno'
+export const REGISTRAR_PROFESOR ='/registrar-profesor'
+export const REGISTRAR_UNIVERSIDAD ='/registrar-universidad'
 /*
  * Aqui pertenece los endpoints de la API REST
  */
