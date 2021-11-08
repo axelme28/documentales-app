@@ -14,7 +14,19 @@ export const REGISTRAR_UNIVERSIDAD ='/registrar-universidad'
  */
 
 export const API = 'http://localhost:8080';
+
+//rutas de el administrador de documentales
+
 export const POST_REGISTRAR_DOCUMENTAL = '/registrar-documentales';
 export const GET_VER_DOCUMENTALES = '/ver-documentales';
 export const DELETE_DOCUMENTAL = '/eliminar-documental';
 export const INICIAR_SECION = '/log-in';
+
+//Rutas de la plataforma 
+
+export const POST_REGISTRAR_USER = '/alta-usuario';
+export const ALTA_UNIVERSIDAD = '/alta-universidad';
+export const ALTA_EQUIPO = '/alta-equipo';
+
+
+

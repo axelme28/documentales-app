@@ -2,9 +2,36 @@ import React from 'react';
 import { Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import useForm from '../hooks/useForm';
 import adminImg from '../assets/imgs/universidad.png';
+import { _altaUniversidad } from '../api/index.api';
+
+const initialState = {
+	  nombre: '',
+	  codigo: 0,
+};
+
 
 export const RegistroUniscreen = () => {
-	const { values, handleChange } = useForm('');
+
+
+
+
+	const [ values, setValues, handleInputChange, reset ] = useForm(initialState);
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try{
+		const { nombre, codigo } = values;
+		const data = {
+			nombre,
+			codigo,
+		};
+		const response = await _altaUniversidad(data);
+		console.log(response);
+		reset();
+		}catch(error){
+			console.log(error);
+		}
+	};
 	return (
 		<>
 			<Grid container component='main' sx={{ height: '100vh' }}>
@@ -19,23 +46,8 @@ export const RegistroUniscreen = () => {
 								<Box
 									component='form'
 									noValidate
-									onSubmit={() => {}}
 									sx={{ mt: 1, mx: 2 }}
-								>
-								    <TextField
-										autoComplete='name'
-										autoFocus
-										fullWidth
-										id='universidad'
-										label='Universidad'
-										margin='normal'
-										name='universidad'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-
-					
+								>	
 
 									<TextField
 										fullWidth
@@ -45,7 +57,7 @@ export const RegistroUniscreen = () => {
 										name='nombre'
 										required
 										type='text'
-										onChange={handleChange}
+										onChange={handleInputChange}
 									/>
 									
 									<TextField
@@ -56,7 +68,7 @@ export const RegistroUniscreen = () => {
 										name='codigo'
 										required
 										type='text'
-										onChange={handleChange}
+										onChange={handleInputChange}
 									/>
 
 								
@@ -68,7 +80,6 @@ export const RegistroUniscreen = () => {
 								<Box
 									component='form'
 									noValidate
-									onSubmit={() => {}}
 									sx={{ mt: 1, mx: 2 }}
 							     >
 							    <Button
@@ -77,31 +88,11 @@ export const RegistroUniscreen = () => {
 									variant='contained'
 									sx={{ mt: 5, mb: 2, backgroundColor: '#556169' }}
 									size='large'
-									onClick={() => {}}
+									onClick={handleSubmit}
 								>
 									Guardar
 								</Button>
-								</Box>
-
-
-								<Box
-									component='form'
-									noValidate
-									onSubmit={() => {}}
-									sx={{ mt: 1, mx: 2 }}
-							     >
-							
-								<Button
-									type='submit'
-									fullWidth
-									variant='contained'
-									sx={{ mt: 5, mb: 2, backgroundColor: '#556169' }}
-									size='large'
-									onClick={() => {}}
-								>
-									Cerrar
-								</Button>
-								 </Box>								
+								</Box>								
 								
 							</div>
 

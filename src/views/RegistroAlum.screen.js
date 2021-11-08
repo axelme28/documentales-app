@@ -2,9 +2,43 @@ import React from 'react';
 import { Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import useForm from '../hooks/useForm';
 import adminImg from '../assets/imgs/alumno.png';
+import { _altaUsuario } from '../api/index.api';
+
+const initialState = {
+	typeUser: 'alumno',
+	nombre: '',
+    apellidoPaterno: '',
+    apellidoMaterno: '',
+    boleta: '',
+    email: '',
+    password: '',
+    idRol: 'alumno',
+    idUniversidad: 1,
+};
 
 export const RegistroAlum = () => {
-	const { values, handleChange } = useForm('');
+
+
+	const [ values, setValues, handleInputChange, reset] = useForm(initialState);
+
+	console.log(values);
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const { typeUser, nombre, apellidoPaterno, apellidoMaterno, boleta, email, password,idRol,idUniversidad } = values;
+			console.log(idRol);
+
+			const data = { typeUser, nombre, apellidoPaterno, apellidoMaterno, boleta, email, password,idRol: 'alumno', idUniversidad: 1 };
+			console.log(data);
+			const request = await _altaUsuario(data);
+			// console.log(request);
+			
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<>
 			<Grid container component='main' sx={{ height: '100vh' }}>
@@ -19,7 +53,6 @@ export const RegistroAlum = () => {
 								<Box
 									component='form'
 									noValidate
-									onSubmit={() => {}}
 									sx={{ mt: 1, mx: 2 }}
 								>
 								    <TextField
@@ -31,7 +64,7 @@ export const RegistroAlum = () => {
 										name='nombre'
 										required
 										type='text'
-										onChange={handleChange}
+										onChange={e => handleInputChange(e)}
 									/>
 
 					
@@ -41,10 +74,10 @@ export const RegistroAlum = () => {
 										id='materno'
 										label='Apellido Materno'
 										margin='normal'
-										name='materno'
+										name='apellidoMaterno'
 										required
 										type='text'
-										onChange={handleChange}
+										onChange={handleInputChange}
 									/>
                                     
                                     <TextField
@@ -55,25 +88,13 @@ export const RegistroAlum = () => {
 										name='email'
 										required
 										type='text'
-										onChange={handleChange}
-									/>
-
-									<TextField
-										fullWidth
-										id='direccion'
-										label='Direccion'
-										margin='normal'
-										name='direccion'
-										required
-										type='text'
-										onChange={handleChange}
+										onChange={handleInputChange}
 									/>
 								</Box>
 
 								<Box
 									component='form'
 									noValidate
-									onSubmit={() => {}}
 									sx={{ mt: 1, mx: 2 }}
 								>
 									 <TextField
@@ -81,10 +102,10 @@ export const RegistroAlum = () => {
 										id='paterno'
 										label='Apellido Paterno'
 										margin='normal'
-										name='paterno'
+										name='apellidoPaterno'
 										required
 										type='text'
-										onChange={handleChange}
+										onChange={handleInputChange}
 									/>
 
 									<TextField
@@ -95,7 +116,7 @@ export const RegistroAlum = () => {
 										name='boleta'
 										required
 										type='text'
-										onChange={handleChange}
+										onChange={handleInputChange}
 									/>
 
 									<TextField
@@ -107,7 +128,7 @@ export const RegistroAlum = () => {
 										name='password'
 										required
 										type='password'
-										onChange={handleChange}
+										onChange={handleInputChange}
 									/>
 
 									<TextField
@@ -115,31 +136,26 @@ export const RegistroAlum = () => {
 										id='universidad'
 										label='Universidad'
 										margin='normal'
-										name='universidad'
+										name='idUniversidad'
 										required
-										type='text'
-										onChange={handleChange}
+										type='number'
+										onChange={handleInputChange}
 									/>
 								</Box>
 							</div>
 
-							<Box
-								component='form'
-								noValidate
-								onSubmit={() => {}}
-								sx={{ mt: 1 }}
-							>
+							
 								<Button
 									type='submit'
 									fullWidth
 									variant='contained'
 									sx={{ mt: 5, mb: 2, backgroundColor: '#556169' }}
 									size='large'
-									onClick={() => {}}
+									onClick={handleSubmit}
 								>
 									Guardar
 								</Button>
-							</Box>
+							
 						</Box>
 					</div>
 				</Grid>
