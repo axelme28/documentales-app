@@ -2,149 +2,158 @@ import React from 'react';
 import { Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import useForm from '../hooks/useForm';
 import adminImg from '../assets/imgs/admin.png';
+import MainLayout from '../layout/MainLayout';
 
 export const RegistrarAdmiscreen = () => {
-	const { values, handleChange } = useForm('');
+	const { handleChange } = useForm('');
 	return (
 		<>
-			<Grid container component='main' sx={{ height: '100vh' }}>
-				<Grid item xs={false} sm={4} md={6} sx={styles.image} />
-				<Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
-					<div style={{ marginTop: 50 }}>
-						<Box sx={styles.box}>
-							<Typography component='h1' variant='h5'>
-								Registrar Administrador
-							</Typography>
-							<div className='d-flex justify-content-between'>
+			<MainLayout>
+				<Grid container component='main' sx={{ height: '100vh' }}>
+					<Grid item xs={false} sm={4} md={6} sx={styles.image} />
+					<Grid
+						item
+						xs={12}
+						sm={8}
+						md={6}
+						component={Paper}
+						elevation={6}
+						square
+					>
+						<div style={{ marginTop: 50 }}>
+							<Box sx={styles.box}>
+								<Typography component='h1' variant='h5'>
+									Registrar Administrador
+								</Typography>
+								<div className='d-flex justify-content-between'>
+									<Box
+										component='form'
+										noValidate
+										onSubmit={() => {}}
+										sx={{ mt: 1, mx: 2 }}
+									>
+										<TextField
+											autoComplete='name'
+											autoFocus
+											fullWidth
+											id='nombre'
+											label='Nombre'
+											margin='normal'
+											name='nombre'
+											required
+											type='text'
+											onChange={handleChange}
+										/>
+
+										<TextField
+											fullWidth
+											id='materno'
+											label='Apellido Materno'
+											margin='normal'
+											name='materno'
+											required
+											type='text'
+											onChange={handleChange}
+										/>
+
+										<TextField
+											fullWidth
+											id='email'
+											label='Email'
+											margin='normal'
+											name='email'
+											required
+											type='text'
+											onChange={handleChange}
+										/>
+
+										<TextField
+											fullWidth
+											id='direccion'
+											label='Direccion'
+											margin='normal'
+											name='direccion'
+											required
+											type='text'
+											onChange={handleChange}
+										/>
+									</Box>
+
+									<Box
+										component='form'
+										noValidate
+										onSubmit={() => {}}
+										sx={{ mt: 1, mx: 2 }}
+									>
+										<TextField
+											fullWidth
+											id='paterno'
+											label='Apellido Paterno'
+											margin='normal'
+											name='paterno'
+											required
+											type='text'
+											onChange={handleChange}
+										/>
+
+										<TextField
+											fullWidth
+											id='telefono'
+											label='Telefono '
+											margin='normal'
+											name='telefono'
+											required
+											type='text'
+											onChange={handleChange}
+										/>
+
+										<TextField
+											autoComplete='current-password'
+											fullWidth
+											id='password'
+											label='Contraseña'
+											margin='normal'
+											name='password'
+											required
+											type='password'
+											onChange={handleChange}
+										/>
+
+										<TextField
+											fullWidth
+											id='universidad'
+											label='Universidad'
+											margin='normal'
+											name='universidad'
+											required
+											type='text'
+											onChange={handleChange}
+										/>
+									</Box>
+								</div>
+
 								<Box
 									component='form'
 									noValidate
 									onSubmit={() => {}}
-									sx={{ mt: 1, mx: 2 }}
+									sx={{ mt: 1 }}
 								>
-								    <TextField
-										autoComplete='name'
-										autoFocus
+									<Button
+										type='submit'
 										fullWidth
-										id='nombre'
-										label='Nombre'
-										margin='normal'
-										name='nombre'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-
-					
-
-									<TextField
-										fullWidth
-										id='materno'
-										label='Apellido Materno'
-										margin='normal'
-										name='materno'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-									
-                                    <TextField
-										fullWidth
-										id='email'
-										label='Email'
-										margin='normal'
-										name='email'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-
-									<TextField
-										fullWidth
-										id='direccion'
-										label='Direccion'
-										margin='normal'
-										name='direccion'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
+										variant='contained'
+										sx={{ mt: 5, mb: 2, backgroundColor: '#556169' }}
+										size='large'
+										onClick={() => {}}
+									>
+										Guardar
+									</Button>
 								</Box>
-
-								<Box
-									component='form'
-									noValidate
-									onSubmit={() => {}}
-									sx={{ mt: 1, mx: 2 }}
-								>
-									 <TextField
-										fullWidth
-										id='paterno'
-										label='Apellido Paterno'
-										margin='normal'
-										name='paterno'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-
-									<TextField
-										fullWidth
-										id='telefono'
-										label='Telefono '
-										margin='normal'
-										name='telefono'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-
-									<TextField
-										autoComplete='current-password'
-										fullWidth
-										id='password'
-										label='Contraseña'
-										margin='normal'
-										name='password'
-										required
-										type='password'
-										onChange={handleChange}
-									/>
-
-									<TextField
-										fullWidth
-										id='universidad'
-										label='Universidad'
-										margin='normal'
-										name='universidad'
-										required
-										type='text'
-										onChange={handleChange}
-									/>
-								</Box>
-							</div>
-
-							<Box
-								component='form'
-								noValidate
-								onSubmit={() => {}}
-								sx={{ mt: 1 }}
-							>
-								<Button
-									type='submit'
-									fullWidth
-									variant='contained'
-									sx={{ mt: 5, mb: 2, backgroundColor: '#556169' }}
-									size='large'
-									onClick={() => {}}
-								>
-									Guardar
-								</Button>
 							</Box>
-						</Box>
-					</div>
+						</div>
+					</Grid>
 				</Grid>
-			</Grid>
+			</MainLayout>
 		</>
 	);
 };

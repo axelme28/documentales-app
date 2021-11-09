@@ -6,6 +6,7 @@ import { NotFound } from '../components';
 import { Loading } from '../components/Loading';
 import TableFilter from '../components/TableFilter';
 import useVerDocumentales from '../hooks/useVerDocumentales';
+import MainLayout from '../layout/MainLayout';
 
 const DocumentalesScreen = () => {
 	const {
@@ -17,69 +18,73 @@ const DocumentalesScreen = () => {
 		optionsPagination,
 	} = useVerDocumentales();
 
+	console.log('documentales Screen');
+
 	return (
 		<>
 			{/* <Container
 				style={{ minHeight: 300 }}
 				className='d-flex justify-content-center align-items-center'
 			> */}
-			<Row noGutters>
-				{loading ? (
-					<Col
-						sm='auto'
-						md='12'
-						className='d-flex justify-content-center align-items-center mt-5 pt-3'
-					>
-						<Loading />
-					</Col>
-				) : (
-					<>
+			<MainLayout>
+				<Row noGutters>
+					{loading ? (
 						<Col
 							sm='auto'
 							md='12'
-							className='d-flex justify-content-center mt-5'
+							className='d-flex justify-content-center align-items-center mt-5 pt-3'
 						>
-							<TableFilter
-								placeholder={'Busqueda de Documentales'}
-								name={'search'}
-								value={searchItem}
-								onChange={handleChangeInputSearch}
-								styles={{
-									width: 400,
-									fontFamily: "'Roboto', sans-serif",
-								}}
-							/>
+							<Loading />
 						</Col>
-						<div
-							className='d-flex justify-content-center align-items-center'
-							style={{ width: '100%' }}
-						>
-							<div className='mt-3'>
-								<DataTable
-									//clearSelectedRows={clear}
-									//customStyles={styles.dataTable}
-									//onSelectedRowsChange={handleRow} //genera radiobuton
-									//se conoce como props o propiedades de los
-									//seleccionableRowsNoSelectAll
-									//selectableRows
-									//selectableRowsComponent={RadioButton}
-									customStyles={styles.dataTable}
-									columns={columnsDataTable}
-									data={foundItem}
-									dense //ser comprimidas
-									fixedHeader
-									highlightOnHover //sombrear datos
-									noDataComponent={<NotFound />} //pinta si no encuentra nada
-									pagination
-									paginationComponentOptions={optionsPagination}
-									responsive // ajustar a cualquier tipo de pantalla
-									striped //filas de diferentes colores
+					) : (
+						<>
+							<Col
+								sm='auto'
+								md='12'
+								className='d-flex justify-content-center mt-5'
+							>
+								<TableFilter
+									placeholder={'Busqueda de Documentales'}
+									name={'search'}
+									value={searchItem}
+									onChange={handleChangeInputSearch}
+									styles={{
+										width: 400,
+										fontFamily: "'Roboto', sans-serif",
+									}}
 								/>
+							</Col>
+							<div
+								className='d-flex justify-content-center align-items-center'
+								style={{ width: '100%' }}
+							>
+								<div className='mt-3'>
+									<DataTable
+										//clearSelectedRows={clear}
+										//customStyles={styles.dataTable}
+										//onSelectedRowsChange={handleRow} //genera radiobuton
+										//se conoce como props o propiedades de los
+										//seleccionableRowsNoSelectAll
+										//selectableRows
+										//selectableRowsComponent={RadioButton}
+										customStyles={styles.dataTable}
+										columns={columnsDataTable}
+										data={foundItem}
+										dense //ser comprimidas
+										fixedHeader
+										highlightOnHover //sombrear datos
+										noDataComponent={<NotFound />} //pinta si no encuentra nada
+										pagination
+										paginationComponentOptions={optionsPagination}
+										responsive // ajustar a cualquier tipo de pantalla
+										striped //filas de diferentes colores
+									/>
+								</div>
 							</div>
-						</div>
-					</>
-				)}
-			</Row>
+						</>
+					)}
+				</Row>
+			</MainLayout>
 			{/* </Container> */}
 		</>
 	);

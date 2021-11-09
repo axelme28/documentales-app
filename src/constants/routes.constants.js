@@ -2,13 +2,15 @@
  * Aqui pertenece las rutas de la app (Router)
  */
 
-export const DOCUMENTALES_VIEW = '/documentales';
-export const REGISTRAR_DOCUMENTAL = '/registrar-documental';
-export const LOG_IN = '/login'
-export const REGISTRAR_ADMINISTRADOR ='/registrar-administrador'
-export const REGISTRAR_ALUMNOS ='/registrar-alumno'
-export const REGISTRAR_PROFESOR ='/registrar-profesor'
-export const REGISTRAR_UNIVERSIDAD ='/registrar-universidad'
+export const ADMINISTRADOR_DOCUMENTALES_VIEW = '/administrador/documentales';
+export const ADMINISTRADOR_REGISTRAR_DOCUMENTAL = '/administrador/registrar-documental';
+
+export const PLATAFORMA_REGISTRAR_UNIVERSIDAD = '/administrador/alta-universidad';
+export const PLATAFORMA_REGISTRAR_ADMINISTRADOR = '/administrador/alta-administrador-uni';
+
+export const PLATAFORMA_REGISTRAR_PROFESOR = '/plataforma/alta-profesor';
+export const PLATAFORMA_REGISTRAR_ALUMNOS = '/plataforma/alta-alumno';
+export const LOG_IN = '/login';
 /*
  * Aqui pertenece los endpoints de la API REST
  */
@@ -22,11 +24,8 @@ export const GET_VER_DOCUMENTALES = '/ver-documentales';
 export const DELETE_DOCUMENTAL = '/eliminar-documental';
 export const INICIAR_SECION = '/log-in';
 
-//Rutas de la plataforma 
+//Rutas de la plataforma
 
 export const POST_REGISTRAR_USER = '/alta-usuario';
 export const ALTA_UNIVERSIDAD = '/alta-universidad';
 export const ALTA_EQUIPO = '/alta-equipo';
-
-
-
