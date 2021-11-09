@@ -4,12 +4,11 @@ import { Alert, Col, Container, Row } from 'reactstrap';
 import {
 	loadCaptchaEnginge,
 	LoadCanvasTemplate,
-	LoadCanvasTemplateNoReload,
 	validateCaptcha,
 } from 'react-simple-captcha';
 
 import LoginImage from '../assets/imgs/headphones-g67bdc9328_1920.jpg';
-import { DOCUMENTALES_VIEW } from '../constants/routes.constants';
+import { ADMINISTRADOR_DOCUMENTALES_VIEW } from '../constants/routes.constants';
 import { _iniciarSecion } from '../api/index.api';
 
 const initialStateLogin = {
@@ -22,7 +21,7 @@ const initialStateError = {
 	msg: '',
 };
 
-export const LoginScreen =  ({ history }) => {
+export const LoginScreen = ({ history }) => {
 	const [login, setLogin] = useState(initialStateLogin);
 	const [error, setError] = useState(initialStateError);
 	const [captcha, setCaptcha] = useState('');
@@ -41,6 +40,12 @@ export const LoginScreen =  ({ history }) => {
 
 	const handleSubmit = async e => {
 		e.preventDefault();
+
+		setError({
+			...error,
+			status: false,
+		});
+
 		try {
 			if (login.email === '' || login.password === '') {
 				setError({
@@ -56,39 +61,22 @@ export const LoginScreen =  ({ history }) => {
 					msg: 'El captcha capturado no es correcto, intenta de nuevo.',
 				});
 				return;
-			}   
+			}
 
-            const data = await _iniciarSecion(login);
-			// const validate = handleValidateLogin(data, login);
+			const data = await _iniciarSecion(login);
 
-			// if (validate) {
-				history.push(DOCUMENTALES_VIEW);
-			// 	return;
-			// }
+			if (data.validacion) {
+				history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
+			} else {
+				setError({
+					status: true,
+					msg: 'El usuario ó contraseña es incorrecto, intenta de nuevo.',
+				});
+				return;
+			}
 		} catch (error) {
 			console.error(error);
 		}
-	};
-
-	const handleValidateLogin = (User = {}, login = {}) => {
-		 const { email, password } = User;
-
-		if (login.email !== email) {
-			setError({
-				status: true,
-				msg: 'El correo ingresado no existe',
-			});
-			return false;
-		}
-		if (login.email === email && login.password !== password) {
-			setError({
-				status: true,
-				msg: 'La contraseña ingresada es incorrecta, intenta de nuevo',
-			});
-			return false;
-		}
-
-		return true;
 	};
 
 	return (
@@ -128,45 +116,43 @@ export const LoginScreen =  ({ history }) => {
 								type='password'
 								onChange={handleChange}
 							/>
+							<Container className='mt-3'>
+								<Row className='px-5 d-flex justify-content-center'>
+									<Col
+										sm='auto'
+										md='12'
+										className='d-flex justify-content-center'
+									>
+										<div className='d-flex flex-column justify-content-center align-item-center'>
+											<TextField
+												label='Ingresa el captcha'
+												name='captcha'
+												onChange={handleChangeCaptcha}
+												required
+												size='small'
+												type='text'
+												variant='filled'
+											/>
+											<div className='mx-4 mt-2'>
+												<LoadCanvasTemplate />
+											</div>
+										</div>
+									</Col>
+								</Row>
+							</Container>
 							<Button
 								type='submit'
 								fullWidth
 								variant='contained'
-								sx={{ mt: 3, mb: 2 }}
+								sx={{ mt: 2, mb: 2, backgroundColor: '#28a745' }}
+								color='success'
 								onClick={handleSubmit}
 							>
 								Continuar
 							</Button>
-							{/* <Grid container>
-								<Grid item xs>
-									<Link href='#' variant='body2'>
-										¿Olvidaste tu contraseña?
-									</Link>
-								</Grid>
-							</Grid> */}
 						</Box>
 					</Box>
 				</div>
-				<Container>
-					<Row className='px-5 d-flex justify-content-center'>
-						<Col sm='auto' md='12' className='d-flex justify-content-center'>
-							<div className='d-flex flex-column justify-content-center align-item-center'>
-								<TextField
-									label='Ingresa el captcha'
-									name='captcha'
-									onChange={handleChangeCaptcha}
-									required
-									size='small'
-									type='text'
-									variant='filled'
-								/>
-								<div className='mx-4 mt-2'>
-									<LoadCanvasTemplate />
-								</div>
-							</div>
-						</Col>
-					</Row>
-				</Container>
 
 				{error.status && (
 					<Container>
