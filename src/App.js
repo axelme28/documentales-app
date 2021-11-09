@@ -1,16 +1,12 @@
 import React from 'react';
 
-import { IndexRoutes } from './router/index.routes';
 import './index.css';
-import { Plataformaroutes } from './router/Plataforma.routes';
+import AppRouter from './router/AppRouter';
 
 export const App = () => {
 	return (
 		<>
-
-        {/*<IndexRoutes/>*/}
-		 <Plataformaroutes/>
-		 
+			<AppRouter />
 		</>
 	);
 };
