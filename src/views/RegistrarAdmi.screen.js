@@ -1,26 +1,28 @@
 import React from 'react';
 import { Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import useForm from '../hooks/useForm';
+import Swal from 'sweetalert2';
 import adminImg from '../assets/imgs/admin.png';
 import { _altaUsuario } from '../api/index.api';
 import MainLayout from '../layout/MainLayout';
 
 const initialState = {
-	typeUser: 'administrador',
+	typeUser: 'admin',
 	nom_admi: '',
-    apellido_paterno: '',
-    apellido_materno: '',
-    direccion: '',
-    telefono: '',
-    email: '',
-    password:'',
-    idRol: 'administrador',
-    idUniversidad: 1,
+	apellido_paterno: '',
+	apellido_materno: '',
+	direccion: '',
+	telefono: '',
+	email: '',
+	password: '',
+	idRol: 'administrador',
+	idUniversidad: 1,
 };
 
 export const RegistrarAdmiscreen = () => {
-	const [values, , handleInputChange] = useForm(initialState);
+	const [values, , handleInputChange, reset] = useForm(initialState);
 
+	console.log(values);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -40,26 +42,41 @@ export const RegistrarAdmiscreen = () => {
 			} = values;
 
 			const data = {
-
-					typeUser,
-					nom_admi,
-					apellido_paterno,
-					apellido_materno,
-					direccion,
-					telefono,
-					email,
-					password,
-					idRol,
-					idUniversidad,
-
+				typeUser,
+				nom_admi,
+				apellido_paterno,
+				apellido_materno,
+				direccion,
+				telefono,
+				email,
+				password,
+				idRol,
+				idUniversidad,
 			};
 
-			await _altaUsuario(data);
-			
+			const result = await _altaUsuario(data);
+			console.log(result);
+
+			if (result.msg === 'Administrador creado correctamente') {
+				Swal.fire('!Admistrador Registrado!');
+				reset();
+				setTimeout(() => {
+					window.location.reload();
+				}, 1500);
+			} else {
+				Swal.fire({
+					icon: 'error',
+					title: 'Hubo un error',
+				});
+			}
+
+			reset();
+
+			console.log(result);
 		} catch (error) {
 			console.log(error);
 		}
-	}
+	};
 
 	return (
 		<>
@@ -84,17 +101,15 @@ export const RegistrarAdmiscreen = () => {
 									<Box
 										component='form'
 										noValidate
-										onSubmit={() => {}}
 										sx={{ mt: 1, mx: 2 }}
 									>
 										<TextField
 											autoComplete='name'
 											autoFocus
 											fullWidth
-											id='nombre'
 											label='Nombre'
 											margin='normal'
-											name='nombre'
+											name='nom_admi'
 											required
 											type='text'
 											onChange={handleInputChange}
@@ -102,10 +117,9 @@ export const RegistrarAdmiscreen = () => {
 
 										<TextField
 											fullWidth
-											id='materno'
 											label='Apellido Materno'
 											margin='normal'
-											name='materno'
+											name='apellido_materno'
 											required
 											type='text'
 											onChange={handleInputChange}
@@ -113,7 +127,6 @@ export const RegistrarAdmiscreen = () => {
 
 										<TextField
 											fullWidth
-											id='email'
 											label='Email'
 											margin='normal'
 											name='email'
@@ -124,7 +137,6 @@ export const RegistrarAdmiscreen = () => {
 
 										<TextField
 											fullWidth
-											id='direccion'
 											label='Direccion'
 											margin='normal'
 											name='direccion'
@@ -137,15 +149,13 @@ export const RegistrarAdmiscreen = () => {
 									<Box
 										component='form'
 										noValidate
-										onSubmit={() => {}}
 										sx={{ mt: 1, mx: 2 }}
 									>
 										<TextField
 											fullWidth
-											id='paterno'
 											label='Apellido Paterno'
 											margin='normal'
-											name='paterno'
+											name='apellido_paterno'
 											required
 											type='text'
 											onChange={handleInputChange}
@@ -153,7 +163,6 @@ export const RegistrarAdmiscreen = () => {
 
 										<TextField
 											fullWidth
-											id='telefono'
 											label='Telefono '
 											margin='normal'
 											name='telefono'
@@ -165,7 +174,6 @@ export const RegistrarAdmiscreen = () => {
 										<TextField
 											autoComplete='current-password'
 											fullWidth
-											id='password'
 											label='Contraseña'
 											margin='normal'
 											name='password'
@@ -176,7 +184,6 @@ export const RegistrarAdmiscreen = () => {
 
 										<TextField
 											fullWidth
-											id='universidad'
 											label='Universidad'
 											margin='normal'
 											name='universidad'
@@ -187,19 +194,14 @@ export const RegistrarAdmiscreen = () => {
 									</Box>
 								</div>
 
-								<Box
-									component='form'
-									noValidate
-									onSubmit={() => {}}
-									sx={{ mt: 1 }}
-								>
+								<Box component='form' noValidate sx={{ mt: 1 }}>
 									<Button
 										type='submit'
 										fullWidth
 										variant='contained'
 										sx={{ mt: 5, mb: 2, backgroundColor: '#556169' }}
 										size='large'
-										onClick={() => {}}
+										onClick={handleSubmit}
 									>
 										Guardar
 									</Button>

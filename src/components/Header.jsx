@@ -39,12 +39,14 @@ const Header = () => {
 						toggle={() => setToggleDropDown(!toggleDropDown)}
 						isOpen={toggleDropDown}
 					>
-						<DropdownToggle caret>Registrar</DropdownToggle>
+						<DropdownToggle caret
+							style={styles.dropdown}
+						>Registrar</DropdownToggle>
 						<DropdownMenu>
 							<DropdownItem>
 								<NavLink
 									activeClassName='active'
-									style={styles.link}
+									style={styles.link }
 									exact
 									to={ADMINISTRADOR_REGISTRAR_DOCUMENTAL}
 								>
@@ -99,7 +101,7 @@ const Header = () => {
 				<ul className='navbar-nav '>
 					<NavLink
 						activeClassName='active'
-						className='nav-item nav-link'
+						className='nav-item nav-link text-white border'
 						exact
 						to='/login'
 					>
@@ -115,6 +117,10 @@ const styles = {
 	link: {
 		textDecoration: 'none',
 		color: 'darkslateblue',
+	},
+	dropdown: {
+		backgroundColor: 'none',
+		color: 'darkslateblue !important',
 	},
 };
 

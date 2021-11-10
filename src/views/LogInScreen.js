@@ -47,33 +47,33 @@ export const LoginScreen = ({ history }) => {
 		});
 
 		try {
-			if (login.email === '' || login.password === '') {
-				setError({
-					status: true,
-					msg: 'Debes ingresar correo y contraseña, intenta de nuevo.',
-				});
-				return;
-			}
+			// if (login.email === '' || login.password === '') {
+			// 	setError({
+			// 		status: true,
+			// 		msg: 'Debes ingresar correo y contraseña, intenta de nuevo.',
+			// 	});
+			// 	return;
+			// }
 
-			if (!validateCaptcha(captcha)) {
-				setError({
-					status: true,
-					msg: 'El captcha capturado no es correcto, intenta de nuevo.',
-				});
-				return;
-			}
+			// if (!validateCaptcha(captcha)) {
+			// 	setError({
+			// 		status: true,
+			// 		msg: 'El captcha capturado no es correcto, intenta de nuevo.',
+			// 	});
+			// 	return;
+			// }
 
-			const data = await _iniciarSecion(login);
+			await _iniciarSecion(login);
 
-			if (data.validacion) {
-				history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
-			} else {
-				setError({
-					status: true,
-					msg: 'El usuario ó contraseña es incorrecto, intenta de nuevo.',
-				});
-				return;
-			}
+			// if (data.validacion) {
+			history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
+			// } else {
+			// 	setError({
+			// 		status: true,
+			// 		msg: 'El usuario ó contraseña es incorrecto, intenta de nuevo.',
+			// 	});
+			// 	return;
+			// }
 		} catch (error) {
 			console.error(error);
 		}
