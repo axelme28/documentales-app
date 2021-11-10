@@ -2,10 +2,65 @@ import React from 'react';
 import { Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import useForm from '../hooks/useForm';
 import adminImg from '../assets/imgs/admin.png';
+import { _altaUsuario } from '../api/index.api';
 import MainLayout from '../layout/MainLayout';
 
+const initialState = {
+	typeUser: 'administrador',
+	nom_admi: '',
+    apellido_paterno: '',
+    apellido_materno: '',
+    direccion: '',
+    telefono: '',
+    email: '',
+    password:'',
+    idRol: 'administrador',
+    idUniversidad: 1,
+};
+
 export const RegistrarAdmiscreen = () => {
-	const { handleChange } = useForm('');
+	const [values, , handleInputChange] = useForm(initialState);
+
+
+	const handleSubmit = async e => {
+		e.preventDefault();
+
+		try {
+			const {
+				typeUser,
+				nom_admi,
+				apellido_paterno,
+				apellido_materno,
+				direccion,
+				telefono,
+				email,
+				password,
+				idRol,
+				idUniversidad,
+			} = values;
+
+			const data = {
+
+					typeUser,
+					nom_admi,
+					apellido_paterno,
+					apellido_materno,
+					direccion,
+					telefono,
+					email,
+					password,
+					idRol,
+					idUniversidad,
+
+			};
+
+			await _altaUsuario(data);
+			
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	return (
 		<>
 			<MainLayout>
@@ -42,7 +97,7 @@ export const RegistrarAdmiscreen = () => {
 											name='nombre'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -53,7 +108,7 @@ export const RegistrarAdmiscreen = () => {
 											name='materno'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -64,7 +119,7 @@ export const RegistrarAdmiscreen = () => {
 											name='email'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -75,7 +130,7 @@ export const RegistrarAdmiscreen = () => {
 											name='direccion'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 									</Box>
 
@@ -93,7 +148,7 @@ export const RegistrarAdmiscreen = () => {
 											name='paterno'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -104,7 +159,7 @@ export const RegistrarAdmiscreen = () => {
 											name='telefono'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -116,7 +171,7 @@ export const RegistrarAdmiscreen = () => {
 											name='password'
 											required
 											type='password'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -127,7 +182,7 @@ export const RegistrarAdmiscreen = () => {
 											name='universidad'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 									</Box>
 								</div>

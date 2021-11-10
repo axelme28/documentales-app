@@ -34,7 +34,7 @@ export const RegistroAlum = () => {
 				email,
 				password,
 				idRol,
-				// idUniversidad,
+				idUniversidad,
 			} = values;
 			console.log(idRol);
 
@@ -46,8 +46,8 @@ export const RegistroAlum = () => {
 				boleta,
 				email,
 				password,
-				idRol: 'alumno',
-				idUniversidad: 1,
+				idRol,
+				idUniversidad,
 			};
 			console.log(data);
 			// const request =

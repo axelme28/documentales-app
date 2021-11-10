@@ -3,9 +3,62 @@ import { Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import useForm from '../hooks/useForm';
 import adminImg from '../assets/imgs/profesor.png';
 import MainLayout from '../layout/MainLayout';
+import { _altaUsuario } from '../api/index.api';
+
+
+const initialState = {
+	typeUser: 'profesor',
+	nombre: '',
+    apellidoMaterno: '',
+    noTrabajador: '',
+    fechaNacimiento: '',
+    apellidoPaterno: '',
+    email: '',
+    password: '',
+    idRol: 'profesor',
+    idUniversidad: 1,
+
+}
+
 
 export const RegistroProfescreen = () => {
-	const { handleChange } = useForm('');
+	const [values, , handleInputChange] = useForm(initialState);
+
+
+	const handleSubmit = async e => {
+		e.preventDefault();
+		try {
+			const {
+				nombre,
+				apellidoMaterno,
+				noTrabajador,
+				fechaNacimiento,
+				apellidoPaterno,
+				email,
+				password,
+				idRol,
+				idUniversidad,
+			} = values;
+			
+			const data = {
+				nombre,
+				apellidoMaterno,
+				noTrabajador,
+				fechaNacimiento,
+				apellidoPaterno,
+				email,
+				password,
+				idRol,
+				idUniversidad,
+			}
+
+			await _altaUsuario(data);
+		} catch (error) {
+			console.log(error)
+			
+		}
+	};
+
 	return (
 		<>
 			<MainLayout>
@@ -42,7 +95,7 @@ export const RegistroProfescreen = () => {
 											name='nombre'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -53,7 +106,7 @@ export const RegistroProfescreen = () => {
 											name='materno'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -64,7 +117,7 @@ export const RegistroProfescreen = () => {
 											name='noTrabajador'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -75,7 +128,7 @@ export const RegistroProfescreen = () => {
 											name='fechaNacimiento'
 											required
 											type='date'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 									</Box>
 
@@ -93,7 +146,7 @@ export const RegistroProfescreen = () => {
 											name='paterno'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 										<TextField
 											fullWidth
@@ -103,7 +156,7 @@ export const RegistroProfescreen = () => {
 											name='email'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 										<TextField
 											autoComplete='current-password'
@@ -114,7 +167,7 @@ export const RegistroProfescreen = () => {
 											name='password'
 											required
 											type='password'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 
 										<TextField
@@ -125,7 +178,7 @@ export const RegistroProfescreen = () => {
 											name='universidad'
 											required
 											type='text'
-											onChange={handleChange}
+											onChange={handleInputChange}
 										/>
 									</Box>
 								</div>

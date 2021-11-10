@@ -32,3 +32,4 @@ export const _altaUniversidad = async data => {
 export const _altaUsuario = async data => {
 	return await requestPlataforma(POST_REGISTRAR_USER, 'POST', data);
 }
+
