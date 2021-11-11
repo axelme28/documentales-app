@@ -218,3 +218,11 @@ div a.nav-item.nav-link {
 	height: 100vh;
 	min-height: 60rem;
 }
+
+.fondoprofesor{
+	background-image: url(./assets/imgs/profesor.png);
+	background-position: center center;
+	background-size: cover;
+	height: 100vh;
+	min-height: 60rem;
+}
