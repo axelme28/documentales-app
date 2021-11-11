@@ -210,3 +210,11 @@ nav#barrita {
 div a.nav-item.nav-link {
 	color: darkslateblue;
 }
+
+.fondochingon {
+	background-image: url(./assets/imgs/background4.png);
+	background-position: center center;
+	background-size: cover;
+	height: 100vh;
+	min-height: 60rem;
+}
