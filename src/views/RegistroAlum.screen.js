@@ -4,6 +4,8 @@ import useForm from '../hooks/useForm';
 import adminImg from '../assets/imgs/alumno.png';
 import { _altaUsuario } from '../api/index.api';
 import MainLayout from '../layout/MainLayout';
+import Swal from 'sweetalert2';
+
 
 const initialState = {
 	typeUser: 'alumno',
@@ -18,7 +20,7 @@ const initialState = {
 };
 
 export const RegistroAlum = () => {
-	const [values, , handleInputChange] = useForm(initialState);
+	const [values, , handleInputChange,reset] = useForm(initialState);
 
 	console.log(values);
 
@@ -51,8 +53,22 @@ export const RegistroAlum = () => {
 			};
 			console.log(data);
 			// const request =
-			await _altaUsuario(data);
+			const result = await _altaUsuario(data);
+			console.log(result);
 			// console.log(request);
+			if(result.msg === "Alumno creado correctamente") {
+				Swal.fire('!Alumno Registrado!');
+				reset();
+				setTimeout(() => {
+					window.location.reload();
+				}, 1500);
+			}else {
+				Swal.fire({
+					icon: 'error',
+					title: 'Hubo un error',
+					text: 'No se pudo registrar el proyecto, intenta más tarde',
+				});
+			}
 		} catch (error) {
 			console.log(error);
 		}
