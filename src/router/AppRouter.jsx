@@ -47,14 +47,9 @@ const AppRouter = () => {
 					path={PLATAFORMA_REGISTRAR_PROFESOR}
 					component={RegistroProfescreen}
 				/>
-				<Route path={PLATAFORMA_REGISTRAR_ALUMNOS} 
-				component={RegistroAlum} />
+				<Route path={PLATAFORMA_REGISTRAR_ALUMNOS} component={RegistroAlum} />
 
-               <Route
-					
-					path={'/prueba'}
-					component={Vistagaleriascreen}
-				/>
+				<Route path={'/videos'} component={Vistagaleriascreen} />
 
 				<Route path={LOG_IN} component={LoginScreen} />
 				<Redirect to={LOG_IN} />
