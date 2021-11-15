@@ -18,6 +18,7 @@ import { RegistrarAdmiscreen } from '../views/RegistrarAdmi.screen';
 import { RegistroProfescreen } from '../views/RegistroProfe.screen';
 import { RegistroAlum } from '../views/RegistroAlum.screen';
 import { Vistagaleriascreen } from '../views/Vistagaleria.screen';
+import { MainPlataforma } from '../views/plataforma/MainPlataforma';
 
 const AppRouter = () => {
 	return (
@@ -54,6 +55,11 @@ const AppRouter = () => {
 					
 					path={'/prueba'}
 					component={Vistagaleriascreen}
+				/>
+
+				<Route
+					path = '/main-plataforma'
+					component = {MainPlataforma}
 				/>
 
 				<Route path={LOG_IN} component={LoginScreen} />
