@@ -17,8 +17,8 @@ const Header = () => {
 		<nav className='navbar navbar-expand-sm  p-3' id='barrita'>
 			<Link
 				className='navbar-brand'
-				to='/'
-				style={{ pointerEvents: 'none', color: 'darkslateblue' }}
+				to='/videos'
+				style={{ color: 'darkslateblue' }}
 			>
 				Documentales
 			</Link>
@@ -39,14 +39,14 @@ const Header = () => {
 						toggle={() => setToggleDropDown(!toggleDropDown)}
 						isOpen={toggleDropDown}
 					>
-						<DropdownToggle caret
-							style={styles.dropdown}
-						>Registrar</DropdownToggle>
+						<DropdownToggle caret style={styles.dropdown}>
+							Registrar
+						</DropdownToggle>
 						<DropdownMenu>
 							<DropdownItem>
 								<NavLink
 									activeClassName='active'
-									style={styles.link }
+									style={styles.link}
 									exact
 									to={ADMINISTRADOR_REGISTRAR_DOCUMENTAL}
 								>
