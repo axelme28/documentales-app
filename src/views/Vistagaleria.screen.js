@@ -15,6 +15,7 @@ import VideoContentYT from 'react-video-content-youtube';
 
 import triangulo from '../assets/imgs/caret-right (1).png';
 import { _verDocumentales } from '../api/index.api';
+import MainLayout from '../layout/MainLayout';
 
 export const Vistagaleriascreen = () => {
 	const [documentales, setDocumentales] = useState([]);
@@ -46,61 +47,66 @@ export const Vistagaleriascreen = () => {
 
 	return (
 		<>
-			<section className='fondochingon d-flex justify-content-center align-items-center'>
-				<Container className=' d-flex justify-content-center align-items-center'>
-					<div className='d-flex flex-wrap'>
-						{documentales.map(({ Nombre, categoria, Trama, URL }) => {
-							return (
-								<Card
-									key={URL}
-									style={{ maxWidth: 500, margin: 10 }}
-									className='cartaGrande'
-								>
-									<CardBody>
-										<CardTitle tag='h5'>{Nombre}</CardTitle>
-										<CardSubtitle
-											className='mb-2 text-muted'
-											tag='h6'
-										>
-											{categoria}
-										</CardSubtitle>
-										<CardText>{Trama}</CardText>
-										<Button
-											style={styles.button}
-											onClick={() => {
-												setUrlVideo(URL);
-												toogleView();
-											}}
-										>
-											<img
-												src={triangulo}
-												alt='icono'
-												style={styles.img}
-											/>
-											Reproducir
-										</Button>
-									</CardBody>
-								</Card>
-							);
-						})}
-					</div>
-				</Container>
-			</section>
-			<Modal
-				isOpen={viewPlay}
-				toggle={toogleView}
-				style={{ width: 700, height: 700 }}
-				size='lg'
-			>
-				<ModalBody>
-					<div style={{ height: 'auto', width: 670 }}>
-						<VideoContentYT src={`${urlVideo}`} params={{ autoPlay: true }} />
-					</div>
-				</ModalBody>
-				<ModalFooter>
-					<Button onClick={toogleView}>Cerrar</Button>
-				</ModalFooter>
-			</Modal>
+			<MainLayout>
+				<section className='fondochingon d-flex justify-content-center align-items-center'>
+					<Container className=' d-flex justify-content-center align-items-center'>
+						<div className='d-flex flex-wrap'>
+							{documentales.map(({ Nombre, categoria, Trama, URL }) => {
+								return (
+									<Card
+										key={URL}
+										style={{ maxWidth: 500, margin: 10 }}
+										className='cartaGrande'
+									>
+										<CardBody>
+											<CardTitle tag='h5'>{Nombre}</CardTitle>
+											<CardSubtitle
+												className='mb-2 text-muted'
+												tag='h6'
+											>
+												{categoria}
+											</CardSubtitle>
+											<CardText>{Trama}</CardText>
+											<Button
+												style={styles.button}
+												onClick={() => {
+													setUrlVideo(URL);
+													toogleView();
+												}}
+											>
+												<img
+													src={triangulo}
+													alt='icono'
+													style={styles.img}
+												/>
+												Reproducir
+											</Button>
+										</CardBody>
+									</Card>
+								);
+							})}
+						</div>
+					</Container>
+				</section>
+				<Modal
+					isOpen={viewPlay}
+					toggle={toogleView}
+					style={{ width: 700, height: 700 }}
+					size='lg'
+				>
+					<ModalBody>
+						<div style={{ height: 'auto', width: 670 }}>
+							<VideoContentYT
+								src={`${urlVideo}`}
+								params={{ autoPlay: true }}
+							/>
+						</div>
+					</ModalBody>
+					<ModalFooter>
+						<Button onClick={toogleView}>Cerrar</Button>
+					</ModalFooter>
+				</Modal>
+			</MainLayout>
 		</>
 	);
 };
