@@ -227,5 +227,29 @@ div a.nav-item.nav-link {
 	transform: scale(1.1);
 }
 
+.app{
+	display: flex;
+    position: relative;
+	background-color: #fff !important;
+}
 
 
+.appMain {
+	padding: 24 px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;	
+}
+
+.pro-sidebar ,.pro-sidebar-inner{
+	background-color: #fff !important;
+} 
+
+.pro-sidebar .pro-menu > ul > .pro-sub-menu > .pro-inner-list-item{
+	background-color: #fff !important;
+} 
+
+ul :hover{
+	color: #515D8A !important;
+}

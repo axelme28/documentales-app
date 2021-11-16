@@ -18,7 +18,7 @@ import { RegistrarAdmiscreen } from '../views/RegistrarAdmi.screen';
 import { RegistroProfescreen } from '../views/RegistroProfe.screen';
 import { RegistroAlum } from '../views/RegistroAlum.screen';
 import { Vistagaleriascreen } from '../views/Vistagaleria.screen';
-import { MainPlataforma } from '../views/plataforma/MainPlataforma';
+import { Sidebar } from '../components/ProSidebar';
 
 const AppRouter = () => {
 	return (
@@ -53,8 +53,8 @@ const AppRouter = () => {
 				<Route path={'/videos'} component={Vistagaleriascreen} />
 
 				<Route
-					path = '/main-plataforma'
-					component = {MainPlataforma}
+					path = '/sidebar'
+					component = {Sidebar}
 				/>
 
 				<Route path={LOG_IN} component={LoginScreen} />
