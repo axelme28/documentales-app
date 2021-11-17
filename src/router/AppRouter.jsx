@@ -18,7 +18,8 @@ import { RegistrarAdmiscreen } from '../views/RegistrarAdmi.screen';
 import { RegistroProfescreen } from '../views/RegistroProfe.screen';
 import { RegistroAlum } from '../views/RegistroAlum.screen';
 import { Vistagaleriascreen } from '../views/Vistagaleria.screen';
-import { Sidebar } from '../components/ProSidebar';
+import { Sidebar } from '../components/Sidebar';
+import { PostsScreen } from '../views/Posts.Screen';
 
 const AppRouter = () => {
 	return (
@@ -58,7 +59,10 @@ const AppRouter = () => {
 				/>
 
 				<Route path={LOG_IN} component={LoginScreen} />
+
+				<Route path="/publicaciones" component={PostsScreen} />
 				<Redirect to={LOG_IN} />
+
 			</Switch>
 		</BrowserRouter>
 	);

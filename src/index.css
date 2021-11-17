@@ -239,7 +239,8 @@ div a.nav-item.nav-link {
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
-	overflow-y: auto;	
+	overflow-y: auto;
+	padding: 50px;;	
 }
 
 .pro-sidebar ,.pro-sidebar-inner{
