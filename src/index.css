@@ -236,7 +236,7 @@ div a.nav-item.nav-link {
 
 .appMain {
 	/* padding: 24 px; */
-	padding: 60px;;	
+	
 }
 
 .pro-sidebar ,.pro-sidebar-inner{
@@ -257,4 +257,9 @@ ul :hover{
 .message{
 	justify-content: flex-end;
   	display: flex;
+}
+
+.posts{
+	overflow-y: scroll;
+	  
 }

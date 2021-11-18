@@ -27,14 +27,18 @@ export const Sidebar = () => {
 					</MenuItem>
 					<div className='d-flex m-2'>
 						<img src={iconDoc} style={styles.img} />
-						<MenuItem>Documentales</MenuItem>
+						<MenuItem>Documentales
+							<Link to = '/videos'/>
+						</MenuItem>
 					</div>
 					<div className='d-flex m-2'>
 						<img src={iconTarea} style={styles.img} />
 						<MenuItem>Tareas</MenuItem>
 					</div>
 					<SubMenu title='Teams'>
-						<MenuItem style={{ marginTop: '10' }}>team 1</MenuItem>
+						<MenuItem style={{ marginTop: '10' }}>team 1
+						<Link to = '/publicaciones'/>
+						</MenuItem>
 						<MenuItem>team 2</MenuItem>
 					</SubMenu>
 				</Menu>

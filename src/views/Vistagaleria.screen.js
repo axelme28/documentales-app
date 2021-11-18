@@ -16,6 +16,7 @@ import VideoContentYT from 'react-video-content-youtube';
 import triangulo from '../assets/imgs/caret-right (1).png';
 import { _verDocumentales } from '../api/index.api';
 import MainLayout from '../layout/MainLayout';
+import {Sidebar} from '../components/Sidebar'
 
 export const Vistagaleriascreen = () => {
 	const [documentales, setDocumentales] = useState([]);
@@ -47,7 +48,9 @@ export const Vistagaleriascreen = () => {
 
 	return (
 		<>
-			
+			<div className='app '>
+				<Sidebar/>
+				<main className=' container'>
 				<section className='fondochingon d-flex justify-content-center align-items-center'>
 					<Container className=' d-flex justify-content-center align-items-center'>
 						<div className='d-flex flex-wrap'>
@@ -106,6 +109,8 @@ export const Vistagaleriascreen = () => {
 						<Button onClick={toogleView}>Cerrar</Button>
 					</ModalFooter>
 				</Modal>
+				</main>
+			</div>
 		</>
 	);
 };
