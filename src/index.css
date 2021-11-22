@@ -220,46 +220,48 @@ div a.nav-item.nav-link {
 }
 
 .cartaGrande {
-	transition: .3s all ease;
+	transition: 0.3s all ease;
 }
 
 .cartaGrande:hover {
 	transform: scale(1.1);
 }
 
-.app{
+.app {
 	display: flex;
-    position: relative;
+	position: relative;
 	background-color: #fff !important;
 }
-
 
 .appMain {
 	/* padding: 24 px; */
-	
+	width: 100%;
 }
 
-.pro-sidebar ,.pro-sidebar-inner{
+.pro-sidebar,
+.pro-sidebar-inner {
 	background-color: #fff !important;
-} 
+}
 
-.pro-sidebar .pro-menu > ul > .pro-sub-menu > .pro-inner-list-item{
+.pro-sidebar .pro-menu > ul > .pro-sub-menu > .pro-inner-list-item {
 	background-color: #fff !important;
-} 
+}
 
-ul :hover{
-	color: #515D8A !important;
+ul :hover {
+	color: #515d8a !important;
 }
 .col {
-	margin-top:2rem !important;
+	margin-top: 2rem !important;
 }
 
-.message{
+.message {
 	justify-content: flex-end;
-  	display: flex;
+	display: flex;
 }
 
-.posts{
+.posts {
 	overflow-y: scroll;
-	  
+}
+.container {
+	padding: 0 !important;
 }
