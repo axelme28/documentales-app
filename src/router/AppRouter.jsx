@@ -20,6 +20,7 @@ import { RegistroAlum } from '../views/RegistroAlum.screen';
 import { Vistagaleriascreen } from '../views/Vistagaleria.screen';
 import { Sidebar } from '../components/Sidebar';
 import { PostsScreen } from '../views/Posts.Screen';
+import { NewTeamScreen } from '../views/NewTeamScreen';
 
 const AppRouter = () => {
 	return (
@@ -53,16 +54,14 @@ const AppRouter = () => {
 
 				<Route path={'/videos'} component={Vistagaleriascreen} />
 
-				<Route
-					path = '/sidebar'
-					component = {Sidebar}
-				/>
+				<Route path='/sidebar' component={Sidebar} />
 
 				<Route path={LOG_IN} component={LoginScreen} />
 
-				<Route path="/publicaciones" component={PostsScreen} />
-				<Redirect to={LOG_IN} />
+				<Route path='/publicaciones' component={PostsScreen} />
 
+				<Route path='/nuevo-equipo' component={NewTeamScreen} />
+				<Redirect to={LOG_IN} />
 			</Switch>
 		</BrowserRouter>
 	);
