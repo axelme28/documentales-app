@@ -29,3 +29,6 @@ export const INICIAR_SECION = '/log-in';
 export const POST_REGISTRAR_USER = '/alta-usuario';
 export const ALTA_UNIVERSIDAD = '/alta-universidad';
 export const ALTA_EQUIPO = '/alta-equipo';
+export const GET_POST = '/publicaciones';
+export const POST_PUBLICACION = '/crear-publicacion';
+export const POST_REGISTRAR_TEAM = '/alta-equipo';

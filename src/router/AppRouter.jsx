@@ -18,6 +18,9 @@ import { RegistrarAdmiscreen } from '../views/RegistrarAdmi.screen';
 import { RegistroProfescreen } from '../views/RegistroProfe.screen';
 import { RegistroAlum } from '../views/RegistroAlum.screen';
 import { Vistagaleriascreen } from '../views/Vistagaleria.screen';
+import { Sidebar } from '../components/Sidebar';
+import { PostsScreen } from '../views/Posts.Screen';
+import { NewTeamScreen } from '../views/NewTeamScreen';
 import { Formularioprofesorscreen } from '../views/Formularioprofesor.screen';
 
 const AppRouter = () => {
@@ -48,14 +51,11 @@ const AppRouter = () => {
 					path={PLATAFORMA_REGISTRAR_PROFESOR}
 					component={RegistroProfescreen}
 				/>
-				<Route path={PLATAFORMA_REGISTRAR_ALUMNOS} 
-				component={RegistroAlum} />
+				<Route path={PLATAFORMA_REGISTRAR_ALUMNOS} component={RegistroAlum} />
 
-               <Route
-					
-					path={'/prueba'}
-					component={Vistagaleriascreen}
-				/>
+				<Route path={'/videos'} component={Vistagaleriascreen} />
+
+				<Route path='/sidebar' component={Sidebar} />
 
                 <Route
 					path={'/prueba1'}
@@ -63,6 +63,10 @@ const AppRouter = () => {
 				/>
 
 				<Route path={LOG_IN} component={LoginScreen} />
+
+				<Route path='/publicaciones' component={PostsScreen} />
+
+				<Route path='/nuevo-equipo' component={NewTeamScreen} />
 				<Redirect to={LOG_IN} />
 			</Switch>
 		</BrowserRouter>

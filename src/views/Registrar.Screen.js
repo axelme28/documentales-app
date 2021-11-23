@@ -77,6 +77,9 @@ export const RegistrarScreen = () => {
 					title: 'Hubo un error',
 					text: 'No se pudo registrar el proyecto, intenta más tarde',
 				});
+				setTimeout(() => {
+					window.location.reload();
+				}, 1500);
 			}
 		} catch (error) {
 			console.error(error);

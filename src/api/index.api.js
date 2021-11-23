@@ -4,7 +4,10 @@ import {
 	DELETE_DOCUMENTAL,
 	INICIAR_SECION,
 	ALTA_UNIVERSIDAD,
-	POST_REGISTRAR_USER
+	POST_REGISTRAR_USER,
+	GET_POST,
+	POST_PUBLICACION,
+	POST_REGISTRAR_TEAM,
 } from '../constants/routes.constants';
 import { request, requestPlataforma } from './requestClient.api';
 
@@ -22,8 +25,8 @@ export const _eliminarDocumental = async id => {
 };
 
 export const _iniciarSecion = async data => {
-	return await request(INICIAR_SECION, 'POST',data);
-}
+	return await request(INICIAR_SECION, 'POST', data);
+};
 
 export const _altaUniversidad = async data => {
 	return await requestPlataforma(ALTA_UNIVERSIDAD, 'POST', data);
@@ -31,5 +34,16 @@ export const _altaUniversidad = async data => {
 
 export const _altaUsuario = async data => {
 	return await requestPlataforma(POST_REGISTRAR_USER, 'POST', data);
-}
+};
 
+export const _getPosts = async data => {
+	return await requestPlataforma(GET_POST, 'POST', data);
+};
+
+export const _sendPublication = async data => {
+	return await requestPlataforma(POST_PUBLICACION, 'POST', data);
+};
+
+export const _postRegistrarTeam = async data => {
+	return await requestPlataforma(POST_REGISTRAR_TEAM, 'POST', data);
+};
