@@ -47,33 +47,39 @@ export const LoginScreen = ({ history }) => {
 		});
 
 		try {
-			// if (login.email === '' || login.password === '') {
-			// 	setError({
-			// 		status: true,
-			// 		msg: 'Debes ingresar correo y contraseña, intenta de nuevo.',
-			// 	});
-			// 	return;
-			// }
+			if (login.email === '' || login.password === '') {
+				setError({
+					status: true,
+					msg: 'Debes ingresar correo y contraseña, intenta de nuevo.',
+				});
+				return;
+			}
 
-			// if (!validateCaptcha(captcha)) {
-			// 	setError({
-			// 		status: true,
-			// 		msg: 'El captcha capturado no es correcto, intenta de nuevo.',
-			// 	});
-			// 	return;
-			// }
+			if (!validateCaptcha(captcha)) {
+				setError({
+					status: true,
+					msg: 'El captcha capturado no es correcto, intenta de nuevo.',
+				});
+				return;
+			}
 
-			await _iniciarSecion(login);
+			const response = await _iniciarSecion(login);
 
-			// if (data.validacion) {
-			history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
-			// } else {
-			// 	setError({
-			// 		status: true,
-			// 		msg: 'El usuario ó contraseña es incorrecto, intenta de nuevo.',
-			// 	});
-			// 	return;
-			// }
+			if (response.msg === 'login success') {
+				console.log(response.result[0]);
+				if(response.result[0].Rolcol === 'administrador'){
+					history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
+				}
+				if(response.result[0].Rolcol === 'alumno' || response.result[0].Rolcol === 'profesor'){
+					history.push('/publicaciones');
+				}
+			} else {
+				setError({
+					status: true,
+					msg: 'El usuario ó contraseña es incorrecto, intenta de nuevo.',
+				});
+				return;
+			}
 		} catch (error) {
 			console.error(error);
 		}
