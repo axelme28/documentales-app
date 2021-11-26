@@ -104,6 +104,7 @@ const Header = () => {
 						className='nav-item nav-link text-white border'
 						exact
 						to='/login'
+						onClick={() => localStorage.clear()}
 					>
 						Logout
 					</NavLink>

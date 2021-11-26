@@ -11,6 +11,7 @@ export const PLATAFORMA_REGISTRAR_ADMINISTRADOR = '/administrador/alta-administr
 export const PLATAFORMA_REGISTRAR_PROFESOR = '/plataforma/alta-profesor';
 export const PLATAFORMA_REGISTRAR_ALUMNOS = '/plataforma/alta-alumno';
 export const LOG_IN = '/plataforma/log-in';
+export const GET_USER_INFO = '/user-info';
 /*
  * Aqui pertenece los endpoints de la API REST
  */
@@ -32,3 +33,5 @@ export const ALTA_EQUIPO = '/alta-equipo';
 export const GET_POST = '/publicaciones';
 export const POST_PUBLICACION = '/crear-publicacion';
 export const POST_REGISTRAR_TEAM = '/alta-equipo';
+export const GET_TEAMS = '/ver-grupos';
+

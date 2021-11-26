@@ -8,6 +8,8 @@ import {
 	GET_POST,
 	POST_PUBLICACION,
 	POST_REGISTRAR_TEAM,
+	GET_USER_INFO,
+	GET_TEAMS,
 } from '../constants/routes.constants';
 import { request, requestPlataforma } from './requestClient.api';
 
@@ -47,3 +49,12 @@ export const _sendPublication = async data => {
 export const _postRegistrarTeam = async data => {
 	return await requestPlataforma(POST_REGISTRAR_TEAM, 'POST', data);
 };
+
+export const _getUserInfo = async data => {
+	return await requestPlataforma(GET_USER_INFO, 'POST', data);
+}
+
+export const _getTeams = async data => {
+	return await requestPlataforma(GET_TEAMS, 'POST', data);
+}
+

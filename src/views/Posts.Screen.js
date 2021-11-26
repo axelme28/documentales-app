@@ -5,7 +5,7 @@ import { Sidebar } from '../components/Sidebar';
 import useForm from '../hooks/useForm';
 //post [{titulo,mensaje},]
 import icon from '../assets/icons/paper-plane (1).png';
-
+//TODO: ponerle logica para que obtenga el id del usuario asi como el nombre del equipo e id del equipo
 const data = {
 	id_usuario: 'rosa@rosa.com',
 };

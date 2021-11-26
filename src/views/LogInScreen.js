@@ -9,7 +9,7 @@ import {
 
 import LoginImage from '../assets/imgs/headphones-g67bdc9328_1920.jpg';
 import { ADMINISTRADOR_DOCUMENTALES_VIEW } from '../constants/routes.constants';
-import { _iniciarSecion } from '../api/index.api';
+import { _getUserInfo, _iniciarSecion } from '../api/index.api';
 
 const initialStateLogin = {
 	email: '',
@@ -64,14 +64,20 @@ export const LoginScreen = ({ history }) => {
 			}
 
 			const response = await _iniciarSecion(login);
-
+			console.log(response.result[0]);
 			if (response.msg === 'login success') {
-				console.log(response.result[0]);
-				if(response.result[0].Rolcol === 'administrador'){
-					history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
+				if (response.result[0].Rolcol === 'administrador') {
+					// history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
+					const result = getUserInfo('administrador', response.result[0].id);
+					result && history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
 				}
-				if(response.result[0].Rolcol === 'alumno' || response.result[0].Rolcol === 'profesor'){
-					history.push('/publicaciones');
+				if (response.result[0].Rolcol === 'alumno') {
+					const result = getUserInfo('alumno', response.result[0].id);
+					result && history.push('/publicaciones');
+				}
+				if (response.result[0].Rolcol === 'profesor') {
+					const result = getUserInfo('profesor', response.result[0].id);
+					result && history.push('/publicaciones');
 				}
 			} else {
 				setError({
@@ -82,6 +88,22 @@ export const LoginScreen = ({ history }) => {
 			}
 		} catch (error) {
 			console.error(error);
+		}
+	};
+
+	const getUserInfo = async (typeUser, idUsuario) => {
+		try {
+			const data = {
+				typeUser,
+				idUsuario,
+			};
+			const response = await _getUserInfo(data);
+			localStorage.setItem('userInfo', JSON.stringify(response));
+			console.log(response);
+			return true;
+		} catch (error) {
+			console.error(error);
+			return false;
 		}
 	};
 
