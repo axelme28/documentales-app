@@ -9,7 +9,7 @@ import {
 
 import LoginImage from '../assets/imgs/headphones-g67bdc9328_1920.jpg';
 import { ADMINISTRADOR_DOCUMENTALES_VIEW } from '../constants/routes.constants';
-import { _iniciarSecion } from '../api/index.api';
+import { _getUserInfo, _iniciarSecion } from '../api/index.api';
 
 const initialStateLogin = {
 	email: '',
@@ -47,35 +47,63 @@ export const LoginScreen = ({ history }) => {
 		});
 
 		try {
-			// if (login.email === '' || login.password === '') {
-			// 	setError({
-			// 		status: true,
-			// 		msg: 'Debes ingresar correo y contraseña, intenta de nuevo.',
-			// 	});
-			// 	return;
-			// }
+			if (login.email === '' || login.password === '') {
+				setError({
+					status: true,
+					msg: 'Debes ingresar correo y contraseña, intenta de nuevo.',
+				});
+				return;
+			}
 
-			// if (!validateCaptcha(captcha)) {
-			// 	setError({
-			// 		status: true,
-			// 		msg: 'El captcha capturado no es correcto, intenta de nuevo.',
-			// 	});
-			// 	return;
-			// }
+			if (!validateCaptcha(captcha)) {
+				setError({
+					status: true,
+					msg: 'El captcha capturado no es correcto, intenta de nuevo.',
+				});
+				return;
+			}
 
-			await _iniciarSecion(login);
-
-			// if (data.validacion) {
-			history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
-			// } else {
-			// 	setError({
-			// 		status: true,
-			// 		msg: 'El usuario ó contraseña es incorrecto, intenta de nuevo.',
-			// 	});
-			// 	return;
-			// }
+			const response = await _iniciarSecion(login);
+			console.log(response.result[0]);
+			if (response.msg === 'login success') {
+				if (response.result[0].Rolcol === 'administrador') {
+					// history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
+					const result = getUserInfo('administrador', response.result[0].id);
+					result && history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
+				}
+				if (response.result[0].Rolcol === 'alumno') {
+					const result = getUserInfo('alumno', response.result[0].id);
+					result && history.push('/publicaciones');
+				}
+				if (response.result[0].Rolcol === 'profesor') {
+					const result = getUserInfo('profesor', response.result[0].id);
+					result && history.push('/publicaciones');
+				}
+			} else {
+				setError({
+					status: true,
+					msg: 'El usuario ó contraseña es incorrecto, intenta de nuevo.',
+				});
+				return;
+			}
 		} catch (error) {
 			console.error(error);
+		}
+	};
+
+	const getUserInfo = async (typeUser, idUsuario) => {
+		try {
+			const data = {
+				typeUser,
+				idUsuario,
+			};
+			const response = await _getUserInfo(data);
+			localStorage.setItem('userInfo', JSON.stringify(response));
+			console.log(response);
+			return true;
+		} catch (error) {
+			console.error(error);
+			return false;
 		}
 	};
 

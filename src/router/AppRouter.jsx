@@ -51,22 +51,43 @@ const AppRouter = () => {
 					path={PLATAFORMA_REGISTRAR_PROFESOR}
 					component={RegistroProfescreen}
 				/>
-				<Route path={PLATAFORMA_REGISTRAR_ALUMNOS} component={RegistroAlum} />
+				<Route 
+					path={PLATAFORMA_REGISTRAR_ALUMNOS} 
+					component={RegistroAlum} />
 
-				<Route path={'/videos'} component={Vistagaleriascreen} />
+				<Route 
+					path={'/videos'} 
+					component={Vistagaleriascreen} />
 
-				<Route path='/sidebar' component={Sidebar} />
+				<Route 
+					path='/sidebar'
+					component={Sidebar} />
 
+<<<<<<< HEAD
                 <Route
 					path={'/prueba1'}
 					component={Formularioprofesorscreen}
 				/>
 
 				<Route path={LOG_IN} component={LoginScreen} />
+=======
+				<Route 
+					path={LOG_IN} 
+					component={LoginScreen} />
+>>>>>>> f02d32ba628961162f7dd47d3b8dc63a8b59012f
 
-				<Route path='/publicaciones' component={PostsScreen} />
+				<Route 
+					path='/publicaciones' 
+					component={PostsScreen} />
 
-				<Route path='/nuevo-equipo' component={NewTeamScreen} />
+				<Route 
+					path='/nuevo-equipo' 
+					component={NewTeamScreen} />
+
+				{/* TODO: poner una ruta que redireccione a un componente nuevo llamado <NewTaskSceen/> */}
+
+				{/* TODO: poner otra ruta para ver las tareas asignadas por el profesor y que redireccione a un nuevo componente llamado <AllTasksScreen/> */}
+				
 				<Redirect to={LOG_IN} />
 			</Switch>
 		</BrowserRouter>

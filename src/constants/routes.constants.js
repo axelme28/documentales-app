@@ -10,7 +10,8 @@ export const PLATAFORMA_REGISTRAR_ADMINISTRADOR = '/administrador/alta-administr
 
 export const PLATAFORMA_REGISTRAR_PROFESOR = '/plataforma/alta-profesor';
 export const PLATAFORMA_REGISTRAR_ALUMNOS = '/plataforma/alta-alumno';
-export const LOG_IN = '/login';
+export const LOG_IN = '/plataforma/log-in';
+export const GET_USER_INFO = '/user-info';
 /*
  * Aqui pertenece los endpoints de la API REST
  */
@@ -22,7 +23,7 @@ export const API = 'http://localhost:8080';
 export const POST_REGISTRAR_DOCUMENTAL = '/registrar-documentales';
 export const GET_VER_DOCUMENTALES = '/ver-documentales';
 export const DELETE_DOCUMENTAL = '/eliminar-documental';
-export const INICIAR_SECION = '/log-in';
+export const INICIAR_SECION = '/plataforma/log-in';
 
 //Rutas de la plataforma
 
@@ -32,3 +33,5 @@ export const ALTA_EQUIPO = '/alta-equipo';
 export const GET_POST = '/publicaciones';
 export const POST_PUBLICACION = '/crear-publicacion';
 export const POST_REGISTRAR_TEAM = '/alta-equipo';
+export const GET_TEAMS = '/ver-grupos';
+

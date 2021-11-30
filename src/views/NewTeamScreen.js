@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	Button,
 	Card,
@@ -9,26 +9,33 @@ import {
 	Input,
 } from 'reactstrap';
 import { Sidebar } from '../components/Sidebar';
-import { _postRegistrarTeam } from '../api/index.api';
+import { _getTeams, _postRegistrarTeam } from '../api/index.api';
 import useForm from '../hooks/useForm';
 import Swal from 'sweetalert2';
 
 const initialState = {
 	nombre: '',
 	codigo: '',
-	idUsuario: '',
+	idUsuario: 0,
 };
 
 export const NewTeamScreen = () => {
 	const [values, , handleInputChange, reset] = useForm(initialState);
+	const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+	const {idUsu} = userInfo;
 
+
+
+	
+
+	//TODO: autogenerar el codigo del equipo
 	const handleCreateTeam = async () => {
 		try {
 			const { nombre, codigo, idUsuario } = values;
 			const data = {
 				nombre,
 				codigo,
-				idUsuario: 9,
+				idUsuario: idUsu,
 			};
 			const response = await _postRegistrarTeam(data);
 			console.log(response);
@@ -46,7 +53,6 @@ export const NewTeamScreen = () => {
 			});
 		}
 	};
-	console.log(values);
 	return (
 		<>
 			<div className='app '>
