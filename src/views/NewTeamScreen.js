@@ -12,6 +12,7 @@ import { Sidebar } from '../components/Sidebar';
 import { _getTeams, _postRegistrarTeam } from '../api/index.api';
 import useForm from '../hooks/useForm';
 import Swal from 'sweetalert2';
+import { useCurrentTeam } from '../hooks/useCurrentTeam';
 
 const initialState = {
 	nombre: '',
@@ -22,11 +23,8 @@ const initialState = {
 export const NewTeamScreen = () => {
 	const [values, , handleInputChange, reset] = useForm(initialState);
 	const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-	const {idUsu} = userInfo;
-
-
-
-	
+	const { idUsu } = userInfo;
+	const { setCurrentTeam } = useCurrentTeam();
 
 	//TODO: autogenerar el codigo del equipo
 	const handleCreateTeam = async () => {
@@ -56,13 +54,13 @@ export const NewTeamScreen = () => {
 	return (
 		<>
 			<div className='app '>
-				<Sidebar />
+				<Sidebar setCurrentTeam={setCurrentTeam} />
 				<main className='appMain' style={{ position: 'relative' }}>
 					<div
 						className='d-flex justify-content-center'
-						style={{ backgroundColor: '#515d8a', height: 38 }}
+						style={{ backgroundColor: '#515d8a', height: 29 }}
 					>
-						<h2 style={{ color: 'white' }}>Crear Nuevo Equipo</h2>
+						<h4 style={{ color: 'white' }}>Crear Nuevo Equipo</h4>
 					</div>
 					<div
 						style={{

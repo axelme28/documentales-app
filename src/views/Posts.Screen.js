@@ -5,26 +5,37 @@ import { Sidebar } from '../components/Sidebar';
 import useForm from '../hooks/useForm';
 //post [{titulo,mensaje},]
 import icon from '../assets/icons/paper-plane (1).png';
+import { useCurrentTeam } from '../hooks/useCurrentTeam';
 //TODO: ponerle logica para que obtenga el id del usuario asi como el nombre del equipo e id del equipo
+const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+const { idUsu } = userInfo;
 const data = {
-	id_usuario: 'rosa@rosa.com',
+	id_usuario: 0,
+	id_equipo: 0,
 };
 
 const initialState = {
 	titulo_publicacion: '',
 	texto_publicacion: '',
-	id_equipo: 1,
+	id_equipo: 0,
 	date: '2001-02-02',
 };
 export const PostsScreen = () => {
 	const [Post, setpost] = useState([]);
 	const [values, , handleInputChange, reset] = useForm(initialState);
+	const { CurrentTeam, setCurrentTeam } = useCurrentTeam();
+	const { nombre, id, codigo } = CurrentTeam;
 
+	console.log(userInfo);
 	useEffect(() => {
-		getPost();
-	}, []);
+		console.log(CurrentTeam);
+	}, [CurrentTeam]);
 
 	const getPost = async () => {
+		data = {
+			id_usuario: idUsu,
+			id_equipo: id,
+		};
 		try {
 			const response = await _getPosts(data);
 			console.log(response);
@@ -38,7 +49,14 @@ export const PostsScreen = () => {
 	const handleSendPublicacion = async e => {
 		e.preventDefault();
 		try {
-			const response = await _sendPublication(values);
+			const { titulo_publicacion, texto_publicacion, id_equipo, date } = values;
+			const data = {
+				titulo_publicacion,
+				texto_publicacion,
+				id_equipo: id,
+				date,
+			};
+			const response = await _sendPublication(data);
 			// console.log(reponse);
 			if (response.ok === true) {
 				Swal.fire(response.message);
@@ -70,15 +88,23 @@ export const PostsScreen = () => {
 	return (
 		<>
 			<div className='app'>
-				<Sidebar />
+				<Sidebar setCurrentTeam={setCurrentTeam} />
 
 				<main className='appMain container'>
 					<div
 						className='d-flex justify-content-center'
-						style={{ backgroundColor: '#515D8A', color: 'white', height: 38 }}
+						style={{ backgroundColor: '#515D8A', color: 'white', height: 29 }}
 					>
-						<h2>Publicaciones</h2>
+						<h4>Publicaciones</h4>
 					</div>
+
+					<div
+						className='d-flex justify-content-center m-3'
+						style={{ color: 'black', height: 38 }}
+					>
+						<h2>{nombre}</h2>
+					</div>
+
 					<div className=''>
 						<div
 							style={{
