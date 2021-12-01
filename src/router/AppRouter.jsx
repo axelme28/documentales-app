@@ -21,7 +21,11 @@ import { Vistagaleriascreen } from '../views/Vistagaleria.screen';
 import { Sidebar } from '../components/Sidebar';
 import { PostsScreen } from '../views/Posts.Screen';
 import { NewTeamScreen } from '../views/NewTeamScreen';
+<<<<<<< HEAD
 import { Formularioprofesorscreen } from '../views/Formularioprofesor.screen';
+=======
+import { NewTaskScreen } from '../views/NewTaskScreen';
+>>>>>>> f80e6fbdcf641fb7cce2b618e5cc3222423f9e8b
 
 const AppRouter = () => {
 	return (
@@ -51,18 +55,13 @@ const AppRouter = () => {
 					path={PLATAFORMA_REGISTRAR_PROFESOR}
 					component={RegistroProfescreen}
 				/>
-				<Route 
-					path={PLATAFORMA_REGISTRAR_ALUMNOS} 
-					component={RegistroAlum} />
+				<Route path={PLATAFORMA_REGISTRAR_ALUMNOS} component={RegistroAlum} />
 
-				<Route 
-					path={'/videos'} 
-					component={Vistagaleriascreen} />
+				<Route path={'/videos'} component={Vistagaleriascreen} />
 
-				<Route 
-					path='/sidebar'
-					component={Sidebar} />
+				<Route path='/sidebar' component={Sidebar} />
 
+<<<<<<< HEAD
 <<<<<<< HEAD
                 <Route
 					path={'/prueba1'}
@@ -75,19 +74,20 @@ const AppRouter = () => {
 					path={LOG_IN} 
 					component={LoginScreen} />
 >>>>>>> f02d32ba628961162f7dd47d3b8dc63a8b59012f
+=======
+				<Route path={LOG_IN} component={LoginScreen} />
+>>>>>>> f80e6fbdcf641fb7cce2b618e5cc3222423f9e8b
 
-				<Route 
-					path='/publicaciones' 
-					component={PostsScreen} />
+				<Route path='/publicaciones' component={PostsScreen} />
 
-				<Route 
-					path='/nuevo-equipo' 
-					component={NewTeamScreen} />
+				<Route path='/nuevo-equipo' component={NewTeamScreen} />
 
 				{/* TODO: poner una ruta que redireccione a un componente nuevo llamado <NewTaskSceen/> */}
 
+				<Route path='/nueva-tarea' component={NewTaskScreen} />
+
 				{/* TODO: poner otra ruta para ver las tareas asignadas por el profesor y que redireccione a un nuevo componente llamado <AllTasksScreen/> */}
-				
+
 				<Redirect to={LOG_IN} />
 			</Switch>
 		</BrowserRouter>

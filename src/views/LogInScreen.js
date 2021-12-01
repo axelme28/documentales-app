@@ -73,11 +73,11 @@ export const LoginScreen = ({ history }) => {
 				}
 				if (response.result[0].Rolcol === 'alumno') {
 					const result = getUserInfo('alumno', response.result[0].id);
-					result && history.push('/publicaciones');
+					result && history.push('/videos');
 				}
 				if (response.result[0].Rolcol === 'profesor') {
 					const result = getUserInfo('profesor', response.result[0].id);
-					result && history.push('/publicaciones');
+					result && history.push('/videos');
 				}
 			} else {
 				setError({
