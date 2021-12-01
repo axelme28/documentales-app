@@ -25,19 +25,20 @@ export const PostsScreen = () => {
 	const [values, , handleInputChange, reset] = useForm(initialState);
 	const { CurrentTeam, setCurrentTeam } = useCurrentTeam();
 	const { nombre, id, codigo } = CurrentTeam;
+	const [DataPost, setDataPost] = useState(data);
 
 	console.log(userInfo);
 	useEffect(() => {
-		console.log(CurrentTeam);
+		getPost();
 	}, [CurrentTeam]);
 
 	const getPost = async () => {
-		data = {
+		setDataPost({
 			id_usuario: idUsu,
 			id_equipo: id,
-		};
+		});
 		try {
-			const response = await _getPosts(data);
+			const response = await _getPosts(DataPost);
 			console.log(response);
 			const response2 = objArray(response);
 			setpost(response2);
@@ -88,7 +89,7 @@ export const PostsScreen = () => {
 	return (
 		<>
 			<div className='app'>
-				<Sidebar setCurrentTeam={setCurrentTeam} />
+				<Sidebar setCurrentTeam={setCurrentTeam} key={CurrentTeam} />
 
 				<main className='appMain container'>
 					<div

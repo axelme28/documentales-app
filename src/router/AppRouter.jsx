@@ -21,6 +21,7 @@ import { Vistagaleriascreen } from '../views/Vistagaleria.screen';
 import { Sidebar } from '../components/Sidebar';
 import { PostsScreen } from '../views/Posts.Screen';
 import { NewTeamScreen } from '../views/NewTeamScreen';
+import { NewTaskScreen } from '../views/NewTaskScreen';
 
 const AppRouter = () => {
 	return (
@@ -50,34 +51,24 @@ const AppRouter = () => {
 					path={PLATAFORMA_REGISTRAR_PROFESOR}
 					component={RegistroProfescreen}
 				/>
-				<Route 
-					path={PLATAFORMA_REGISTRAR_ALUMNOS} 
-					component={RegistroAlum} />
+				<Route path={PLATAFORMA_REGISTRAR_ALUMNOS} component={RegistroAlum} />
 
-				<Route 
-					path={'/videos'} 
-					component={Vistagaleriascreen} />
+				<Route path={'/videos'} component={Vistagaleriascreen} />
 
-				<Route 
-					path='/sidebar'
-					component={Sidebar} />
+				<Route path='/sidebar' component={Sidebar} />
 
-				<Route 
-					path={LOG_IN} 
-					component={LoginScreen} />
+				<Route path={LOG_IN} component={LoginScreen} />
 
-				<Route 
-					path='/publicaciones' 
-					component={PostsScreen} />
+				<Route path='/publicaciones' component={PostsScreen} />
 
-				<Route 
-					path='/nuevo-equipo' 
-					component={NewTeamScreen} />
+				<Route path='/nuevo-equipo' component={NewTeamScreen} />
 
 				{/* TODO: poner una ruta que redireccione a un componente nuevo llamado <NewTaskSceen/> */}
 
+				<Route path='/nueva-tarea' component={NewTaskScreen} />
+
 				{/* TODO: poner otra ruta para ver las tareas asignadas por el profesor y que redireccione a un nuevo componente llamado <AllTasksScreen/> */}
-				
+
 				<Redirect to={LOG_IN} />
 			</Switch>
 		</BrowserRouter>
