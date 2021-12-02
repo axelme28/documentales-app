@@ -17,20 +17,25 @@ const data = {
 const initialState = {
 	titulo_publicacion: '',
 	texto_publicacion: '',
-	id_equipo: 0,
 	date: '2001-02-02',
 };
 export const PostsScreen = () => {
 	const [Post, setpost] = useState([]);
-	const [values, , handleInputChange, reset] = useForm(initialState);
+	const [values, setValues, handleInputChange, reset] = useForm(initialState);
+	const [dataSentPost, setdataSentPost] = useState({});
 	const { CurrentTeam, setCurrentTeam } = useCurrentTeam();
-	const { nombre, id, codigo } = CurrentTeam;
 	const [DataPost, setDataPost] = useState(data);
+
+	const { nombre, id, codigo } = CurrentTeam;
 
 	console.log(userInfo);
 	useEffect(() => {
 		getPost();
-	}, [CurrentTeam]);
+	}, [nombre]);
+
+	// useEffect(() => {
+	// 	handleSendPublicacion();
+	// }, [dataSentPost]);
 
 	const getPost = async () => {
 		setDataPost({
@@ -50,20 +55,34 @@ export const PostsScreen = () => {
 	const handleSendPublicacion = async e => {
 		e.preventDefault();
 		try {
-			const { titulo_publicacion, texto_publicacion, id_equipo, date } = values;
-			const data = {
-				titulo_publicacion,
-				texto_publicacion,
-				id_equipo: id,
-				date,
-			};
-			const response = await _sendPublication(data);
-			// console.log(reponse);
-			if (response.ok === true) {
-				Swal.fire(response.message);
-				setTimeout(() => {
-					window.location.reload();
-				}, 2000);
+			const { titulo_publicacion, texto_publicacion, date } = values;
+
+			if (titulo_publicacion === '' || texto_publicacion === '') {
+				Swal.fire({
+					title: 'Error',
+					text: 'Todos los campos son obligatorios',
+					icon: 'error',
+					confirmButtonText: 'Ok',
+				});
+			} else {
+				setdataSentPost({
+					id_usuario: idUsu,
+					id_equipo: id,
+					titulo_publicacion,
+					texto_publicacion,
+					date,
+				});
+				const response = await _sendPublication(dataSentPost);
+				console.log(response);
+				if (response.ok === true) {
+					Swal.fire({
+						title: 'Exito',
+						text: 'Publicacion enviada',
+						icon: 'success',
+						confirmButtonText: 'Ok',
+					});
+					getPost();
+				}
 			}
 		} catch (error) {
 			console.log(error);
@@ -177,6 +196,7 @@ export const PostsScreen = () => {
 								<img
 									src={icon}
 									style={{ width: 25, marginRight: '1rem' }}
+									alt='icon'
 								/>
 								Enviar
 							</button>
