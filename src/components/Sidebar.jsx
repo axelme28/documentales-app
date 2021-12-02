@@ -10,6 +10,8 @@ import teams from '../assets/icons/icon-teams.png';
 import { height } from '@mui/system';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { _getTeams } from '../api/index.api';
+import { BackAndNext } from './BackAndNext';
+import { AvatarC } from './Avatar';
 
 const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 const { idUsu } = userInfo;
@@ -73,6 +75,8 @@ export const Sidebar = ({ setCurrentTeam }) => {
 						Profesor
 					</h4>
 
+					<BackAndNext />
+
 					<div className='d-flex m-2'>
 						<img
 							src={iconDoc}
@@ -90,7 +94,10 @@ export const Sidebar = ({ setCurrentTeam }) => {
 							style={{ ...styles.img, marginLeft: 18 }}
 							alt='iconTareas'
 						/>
-						<MenuItem>Tareas</MenuItem>
+						<MenuItem>
+							Tareas
+							<Link to='/tareas' />
+						</MenuItem>
 					</div>
 					<div className='d-flex m-2'>
 						<img src={teams} style={{ ...styles.img, width: 50 }} />
@@ -115,15 +122,8 @@ export const Sidebar = ({ setCurrentTeam }) => {
 					</div>
 				</Menu>
 
-				<div className='d-flex justify-content-center align-items-center'>
-					<button
-						className='btn btn-danger'
-						onClick={() => {
-							handleLogOut();
-						}}
-					>
-						Log out
-					</button>
+				<div className='d-flex justify-content-start align-items-start ml-4'>
+					<AvatarC />
 				</div>
 			</ProSidebar>
 			{/* </div> */}

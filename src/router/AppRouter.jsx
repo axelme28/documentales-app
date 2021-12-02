@@ -22,6 +22,8 @@ import { Sidebar } from '../components/Sidebar';
 import { PostsScreen } from '../views/Posts.Screen';
 import { NewTeamScreen } from '../views/NewTeamScreen';
 import { NewTaskScreen } from '../views/NewTaskScreen';
+import { AllTasksScreen } from '../views/AllTasksScreen';
+import { RecordingsScreen } from '../views/RecordingsScreen';
 
 const AppRouter = () => {
 	return (
@@ -68,6 +70,9 @@ const AppRouter = () => {
 				<Route path='/nueva-tarea' component={NewTaskScreen} />
 
 				{/* TODO: poner otra ruta para ver las tareas asignadas por el profesor y que redireccione a un nuevo componente llamado <AllTasksScreen/> */}
+				<Route path='/tareas' component={AllTasksScreen} />
+
+				<Route path='/calificar-tarea' component={RecordingsScreen} />
 
 				<Redirect to={LOG_IN} />
 			</Switch>
