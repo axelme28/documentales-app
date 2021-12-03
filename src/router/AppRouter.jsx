@@ -9,6 +9,12 @@ import {
 	PLATAFORMA_REGISTRAR_PROFESOR,
 	PLATAFORMA_REGISTRAR_ALUMNOS,
 	LOG_IN,
+	PLATAFORMA_GALERIA,
+	PLATAFORMA_PUBLICACIONES,
+	PLATAFORMA_NUEVO_EQUIPO,
+	PLATAFORMA_NUEVA_TAREA,
+	PLATAFORMA_TAREA,
+	PLATAFORMA_CALIFICACIONES,
 } from '../constants/routes.constants';
 import { LoginScreen } from '../views/LogInScreen';
 import DocumentalesScreen from '../views/Documentales.Screen';
@@ -18,7 +24,6 @@ import { RegistrarAdmiscreen } from '../views/RegistrarAdmi.screen';
 import { RegistroProfescreen } from '../views/RegistroProfe.screen';
 import { RegistroAlum } from '../views/RegistroAlum.screen';
 import { Vistagaleriascreen } from '../views/Vistagaleria.screen';
-import { Sidebar } from '../components/Sidebar';
 import { PostsScreen } from '../views/Posts.Screen';
 import { NewTeamScreen } from '../views/NewTeamScreen';
 import { NewTaskScreen } from '../views/NewTaskScreen';
@@ -54,25 +59,22 @@ const AppRouter = () => {
 					component={RegistroProfescreen}
 				/>
 				<Route path={PLATAFORMA_REGISTRAR_ALUMNOS} component={RegistroAlum} />
-
-				<Route path={'/videos'} component={Vistagaleriascreen} />
-
-				<Route path='/sidebar' component={Sidebar} />
+				<Route path={PLATAFORMA_GALERIA} component={Vistagaleriascreen} />
 
 				<Route path={LOG_IN} component={LoginScreen} />
 
-				<Route path='/publicaciones' component={PostsScreen} />
+				<Route path={PLATAFORMA_PUBLICACIONES} component={PostsScreen} />
 
-				<Route path='/nuevo-equipo' component={NewTeamScreen} />
+				<Route path={PLATAFORMA_NUEVO_EQUIPO} component={NewTeamScreen} />
 
 				{/* TODO: poner una ruta que redireccione a un componente nuevo llamado <NewTaskSceen/> */}
 
-				<Route path='/nueva-tarea' component={NewTaskScreen} />
+				<Route path={PLATAFORMA_NUEVA_TAREA} component={NewTaskScreen} />
 
 				{/* TODO: poner otra ruta para ver las tareas asignadas por el profesor y que redireccione a un nuevo componente llamado <AllTasksScreen/> */}
-				<Route path='/tareas' component={AllTasksScreen} />
+				<Route path={PLATAFORMA_TAREA} component={AllTasksScreen} />
 
-				<Route path='/calificar-tarea' component={RecordingsScreen} />
+				<Route path={PLATAFORMA_CALIFICACIONES} component={RecordingsScreen} />
 
 				<Redirect to={LOG_IN} />
 			</Switch>

@@ -4,6 +4,7 @@ import { deepPurple } from '@mui/material/colors';
 
 const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 const { nom_docente } = userInfo;
+
 export const AvatarC = () => {
 	return (
 		<button className='btn'>

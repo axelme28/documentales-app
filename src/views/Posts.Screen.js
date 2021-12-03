@@ -28,7 +28,6 @@ export const PostsScreen = () => {
 
 	const { nombre, id, codigo } = CurrentTeam;
 
-	console.log(userInfo);
 	useEffect(() => {
 		getPost();
 	}, [nombre]);
@@ -44,7 +43,6 @@ export const PostsScreen = () => {
 		});
 		try {
 			const response = await _getPosts(DataPost);
-			console.log(response);
 			const response2 = objArray(response);
 			setpost(response2);
 		} catch (error) {
@@ -73,7 +71,6 @@ export const PostsScreen = () => {
 					date,
 				});
 				const response = await _sendPublication(dataSentPost);
-				console.log(response);
 				if (response.ok === true) {
 					Swal.fire({
 						title: 'Exito',

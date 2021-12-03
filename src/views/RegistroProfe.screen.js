@@ -7,26 +7,21 @@ import { _altaUsuario } from '../api/index.api';
 
 import Swal from 'sweetalert2';
 
-
 const initialState = {
 	typeUser: 'profesor',
 	nombre: '',
-    apellidoMaterno: '',
-    noTrabajador: '',
-    fechaNacimiento: '',
-    apellidoPaterno: '',
-    email: '',
-    password: '',
-    idRol: 'profesor',
-    idUniversidad: 1,
-
-}
-
+	apellidoMaterno: '',
+	noTrabajador: '',
+	fechaNacimiento: '',
+	apellidoPaterno: '',
+	email: '',
+	password: '',
+	idRol: 'profesor',
+	idUniversidad: 1,
+};
 
 export const RegistroProfescreen = () => {
-	const [values, , handleInputChange,reset] = useForm(initialState);
-
-	console.log(values);
+	const [values, , handleInputChange, reset] = useForm(initialState);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -43,7 +38,7 @@ export const RegistroProfescreen = () => {
 				idRol,
 				idUniversidad,
 			} = values;
-			
+
 			const data = {
 				typeUser,
 				nombre,
@@ -55,25 +50,23 @@ export const RegistroProfescreen = () => {
 				password,
 				idRol,
 				idUniversidad,
-			}
+			};
 
-			
 			const result = await _altaUsuario(data);
-			console.log(result);
-			if(result.msg = 'Profesor creado correctamente'){
+			if ((result.msg = 'Profesor creado correctamente')) {
 				Swal.fire('!Profesor creado correctamente!');
 				reset();
 				setTimeout(() => {
 					window.location.reload();
 				}, 1500);
-			}else{
+			} else {
 				Swal.fire({
 					icon: 'error',
-					title: 'Hubo un error'
+					title: 'Hubo un error',
 				});
 			}
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 			Swal.fire({
 				icon: 'error',
 				title: 'Hubo un error',
@@ -157,7 +150,6 @@ export const RegistroProfescreen = () => {
 									<Box
 										component='form'
 										noValidate
-										
 										sx={{ mt: 1, mx: 2 }}
 									>
 										<TextField
@@ -205,12 +197,7 @@ export const RegistroProfescreen = () => {
 									</Box>
 								</div>
 
-								<Box
-									component='form'
-									noValidate
-									
-									sx={{ mt: 1 }}
-								>
+								<Box component='form' noValidate sx={{ mt: 1 }}>
 									<Button
 										type='submit'
 										fullWidth

@@ -37,7 +37,6 @@ export const NewTeamScreen = () => {
 				idUsuario: idUsu,
 			};
 			const response = await _postRegistrarTeam(data);
-			console.log(response);
 			if (response.ok) {
 				Swal.fire(response.message);
 				setTimeout(() => {

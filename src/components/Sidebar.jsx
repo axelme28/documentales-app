@@ -18,7 +18,6 @@ const { idUsu } = userInfo;
 
 export const Sidebar = ({ setCurrentTeam }) => {
 	const history = useHistory();
-	console.log(history);
 	const handleLogOut = () => {
 		localStorage.clear();
 		history.push('/login');
@@ -50,8 +49,6 @@ export const Sidebar = ({ setCurrentTeam }) => {
 
 		return arr;
 	};
-
-	console.log(objArray(Teams));
 
 	return (
 		<>

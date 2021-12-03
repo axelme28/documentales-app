@@ -7,6 +7,12 @@ export const ADMINISTRADOR_REGISTRAR_DOCUMENTAL = '/administrador/registrar-docu
 
 export const PLATAFORMA_REGISTRAR_UNIVERSIDAD = '/administrador/alta-universidad';
 export const PLATAFORMA_REGISTRAR_ADMINISTRADOR = '/administrador/alta-administrador-uni';
+export const PLATAFORMA_GALERIA = '/videos';
+export const PLATAFORMA_PUBLICACIONES = '/publicaciones';
+export const PLATAFORMA_NUEVO_EQUIPO = '/nuevo-equipo';
+export const PLATAFORMA_NUEVA_TAREA = '/nueva-tarea';
+export const PLATAFORMA_TAREA = '/tareas';
+export const PLATAFORMA_CALIFICACIONES = '/calificar-tarea';
 
 export const PLATAFORMA_REGISTRAR_PROFESOR = '/plataforma/alta-profesor';
 export const PLATAFORMA_REGISTRAR_ALUMNOS = '/plataforma/alta-alumno';
@@ -34,4 +40,3 @@ export const GET_POST = '/publicaciones';
 export const POST_PUBLICACION = '/crear-publicacion';
 export const POST_REGISTRAR_TEAM = '/alta-equipo';
 export const GET_TEAMS = '/ver-grupos';
-

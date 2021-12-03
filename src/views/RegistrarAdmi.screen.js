@@ -22,8 +22,6 @@ const initialState = {
 export const RegistrarAdmiscreen = () => {
 	const [values, , handleInputChange, reset] = useForm(initialState);
 
-	console.log(values);
-
 	const handleSubmit = async e => {
 		e.preventDefault();
 
@@ -55,7 +53,6 @@ export const RegistrarAdmiscreen = () => {
 			};
 
 			const result = await _altaUsuario(data);
-			console.log(result);
 
 			if (result.msg === 'Administrador creado correctamente') {
 				Swal.fire('!Admistrador Registrado!');
@@ -71,8 +68,6 @@ export const RegistrarAdmiscreen = () => {
 			}
 
 			reset();
-
-			console.log(result);
 		} catch (error) {
 			console.log(error);
 		}

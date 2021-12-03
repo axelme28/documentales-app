@@ -64,10 +64,8 @@ export const LoginScreen = ({ history }) => {
 			}
 
 			const response = await _iniciarSecion(login);
-			console.log(response.result[0]);
 			if (response.msg === 'login success') {
 				if (response.result[0].Rolcol === 'administrador') {
-					// history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
 					const result = getUserInfo('administrador', response.result[0].id);
 					result && history.push(ADMINISTRADOR_DOCUMENTALES_VIEW);
 				}
