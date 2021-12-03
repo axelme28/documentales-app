@@ -48,8 +48,21 @@ export const NewTaskScreen = () => {
 							<option>Critica</option>
 						</Input>
 					</FormGroup>
+					<FormGroup>
+						<Label for='exampleSelect'>Equipo </Label>
+						<Input id='exampleSelect' name='select' type='select'>
+							<option>Equipo X</option>
+							<option>Equipo Y </option>
+						</Input>
+					</FormGroup>
 					<div className='d-flex justify-content-end mt-4'>
-						<Button color='primary'>Guardar</Button>
+						<Button
+							color='btn'
+							style={{ backgroundColor: '#515d8a', color: 'white' }}
+							onClick={() => {}}
+						>
+							Asignar
+						</Button>
 					</div>
 				</Form>
 			</main>
