@@ -5,40 +5,59 @@ import { Link } from 'react-router-dom';
 import iconDoc from '../assets/icons/film.png';
 import iconTarea from '../assets/icons/book.png';
 import backgroud from '../assets/imgs/background4.png';
-import sidebarIcon from '../assets/icons/sidebar.png';
+// import sidebarIcon from '../assets/icons/sidebar.png';
 import teams from '../assets/icons/icon-teams.png';
-import { height } from '@mui/system';
+// import { height } from '@mui/system';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { _getTeams } from '../api/index.api';
 import { BackAndNext } from './BackAndNext';
 import { AvatarC } from './Avatar';
 
-const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-const { idUsu } = userInfo;
+const initialStateUser = {
+	apellido_materno: 'Perez',
+	apellido_paterno: 'Tito',
+	fecha_naci: '1990-01-03',
+	id: 9,
+	idUsu: 73,
+	no_trabajador: '00214',
+	nom_docente: 'Eton',
+};
 
 export const Sidebar = ({ setCurrentTeam }) => {
 	const history = useHistory();
+	const [Teams, setTeams] = useState({});
+	const [usuario, setUsuario] = useState(initialStateUser);
+
+	useEffect(() => {
+		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+		if (userInfo) {
+			setUsuario(userInfo);
+		}
+	}, []);
+
+	useEffect(() => {
+		getTeams();
+	}, []);
+
 	const handleLogOut = () => {
 		localStorage.clear();
 		history.push('/login');
 	};
 
-	const [Teams, setTeams] = useState({});
-
 	const getTeams = async () => {
 		try {
-			const idUsuario = idUsu;
+			const idUsuario = usuario.idUsu;
 			const data = { idUsuario };
 			const response = await _getTeams(data);
-			setTeams(response);
+			if (JSON.stringify(response) !== JSON.stringify(Teams)) {
+				setTeams(response);
+				const teamsStr = JSON.stringify(objArray(response));
+				localStorage.setItem('teams', teamsStr);
+			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
-
-	useEffect(() => {
-		getTeams();
-	}, []);
 
 	const objArray = (obj = {}) => {
 		let arr = [];
@@ -97,7 +116,11 @@ export const Sidebar = ({ setCurrentTeam }) => {
 						</MenuItem>
 					</div>
 					<div className='d-flex m-2'>
-						<img src={teams} style={{ ...styles.img, width: 50 }} />
+						<img
+							src={teams}
+							style={{ ...styles.img, width: 50 }}
+							alt='imagen'
+						/>
 						<SubMenu title='Teams'>
 							{objArray(Teams).map(team => {
 								const { nombre } = team;

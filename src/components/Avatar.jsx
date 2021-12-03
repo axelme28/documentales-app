@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { deepPurple } from '@mui/material/colors';
 import Button from '@mui/material/Button';
@@ -6,12 +6,28 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-const { nom_docente } = userInfo;
+const initialStateUser = {
+	apellido_materno: 'Perez',
+	apellido_paterno: 'Tito',
+	fecha_naci: '1990-01-03',
+	id: 9,
+	idUsu: 73,
+	no_trabajador: '00214',
+	nom_docente: 'Eton',
+};
 
 export const AvatarC = () => {
 	const history = useHistory();
-	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = useState(null);
+	const [usuario, setUsuario] = useState(initialStateUser);
+
+	useEffect(() => {
+		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+		if (userInfo) {
+			setUsuario(userInfo);
+		}
+	}, []);
+
 	const open = Boolean(anchorEl);
 	const handleClick = event => {
 		setAnchorEl(event.currentTarget);
@@ -38,7 +54,7 @@ export const AvatarC = () => {
 			>
 				<div className='d-flex justufy-content-center'>
 					<Avatar sx={{ bgcolor: deepPurple[500] }}>
-						{nom_docente.charAt(0)}
+						{usuario.nom_docente.charAt(0)}
 					</Avatar>
 					<h6 className='mt-2 ml-2' style={{ color: 'black' }}>
 						Mi perfil

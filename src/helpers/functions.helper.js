@@ -1,3 +1,13 @@
+export const objArray = (obj = {}) => {
+	let arr = [];
+
+	for (let key in obj) {
+		arr.push(obj[key]);
+	}
+
+	return arr;
+};
+
 export const findElementInObject = (string = '', object = {}) => {
 	for (let prop in object) {
 		if (object[prop] !== null) {

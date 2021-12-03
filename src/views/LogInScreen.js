@@ -97,7 +97,6 @@ export const LoginScreen = ({ history }) => {
 			};
 			const response = await _getUserInfo(data);
 			localStorage.setItem('userInfo', JSON.stringify(response));
-			console.log(response);
 			return true;
 		} catch (error) {
 			console.error(error);

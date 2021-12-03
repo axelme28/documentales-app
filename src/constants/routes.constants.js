@@ -40,3 +40,4 @@ export const GET_POST = '/publicaciones';
 export const POST_PUBLICACION = '/crear-publicacion';
 export const POST_REGISTRAR_TEAM = '/alta-equipo';
 export const GET_TEAMS = '/ver-grupos';
+export const GET_ALL_TASK_BY_USER = '/get-tasks';

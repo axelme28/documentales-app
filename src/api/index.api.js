@@ -10,6 +10,7 @@ import {
 	POST_REGISTRAR_TEAM,
 	GET_USER_INFO,
 	GET_TEAMS,
+	GET_ALL_TASK_BY_USER,
 } from '../constants/routes.constants';
 import { request, requestPlataforma } from './requestClient.api';
 
@@ -52,9 +53,12 @@ export const _postRegistrarTeam = async data => {
 
 export const _getUserInfo = async data => {
 	return await requestPlataforma(GET_USER_INFO, 'POST', data);
-}
+};
 
 export const _getTeams = async data => {
 	return await requestPlataforma(GET_TEAMS, 'POST', data);
-}
+};
 
+export const _getAllTaskByUser = async data => {
+	return await requestPlataforma(GET_ALL_TASK_BY_USER, 'POST', data);
+};
