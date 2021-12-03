@@ -3,12 +3,26 @@ import { Sidebar } from '../components/Sidebar';
 import Stack from '@mui/material/Stack';
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Button } from '@mui/material';
 
 export const AllTasksScreen = () => {
 	const history = useHistory();
 	const handleNewTask = () => {
 		history.push('/nueva-tarea');
 	};
+
+	const RecordTaskScreen = (
+		<Button
+			color='secondary'
+			size='small'
+			onClick={() => {
+				history.push('/calificar-tarea');
+			}}
+		>
+			Calificar tarea
+		</Button>
+	);
+
 	return (
 		<div className='app'>
 			<Sidebar />
@@ -20,7 +34,7 @@ export const AllTasksScreen = () => {
 					className='d-flex justify-content-center'
 					style={{ backgroundColor: '#515d8a', height: 29 }}
 				>
-					<h4 style={{ color: 'white' }}>Asignar Tarea</h4>
+					<h4 style={{ color: 'white' }}>Tareas Asignadas</h4>
 				</div>
 				<div className='d-flex justify-content-apace-between mt-3 '>
 					<h5
@@ -30,7 +44,7 @@ export const AllTasksScreen = () => {
 							marginLeft: '48px',
 						}}
 					>
-						Asignar Tarea
+						Asignadas
 					</h5>
 
 					<button
@@ -45,7 +59,7 @@ export const AllTasksScreen = () => {
 					<Stack spacing={2} sx={{ maxWidth: 600 }} className='mt-4'>
 						<SnackbarContent
 							message='I love snacks.'
-							action={() => {}}
+							action={RecordTaskScreen}
 							style={styles.asignacion}
 						/>
 						<SnackbarContent
