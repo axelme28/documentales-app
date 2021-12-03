@@ -1,14 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 //prettier ignore
-import {
-	Button,
-	Card,
-	CardBody,
-	CardSubtitle,
-	CardText,
-	CardTitle,
-	Input,
-} from 'reactstrap';
+import { Form, FormGroup, Input, Label, Button } from 'reactstrap';
 import { Sidebar } from '../components/Sidebar';
 import { _getTeams, _postRegistrarTeam } from '../api/index.api';
 import useForm from '../hooks/useForm';
@@ -26,6 +18,7 @@ export const NewTeamScreen = () => {
 	const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 	const { idUsu } = userInfo;
 	const { setCurrentTeam } = useCurrentTeam();
+	const [Code, setCode] = useState('');
 
 	//TODO: autogenerar el codigo del equipo
 	const handleCreateTeam = async () => {
@@ -37,7 +30,6 @@ export const NewTeamScreen = () => {
 				idUsuario: idUsu,
 			};
 			const response = await _postRegistrarTeam(data);
-			console.log(response);
 			if (response.ok) {
 				Swal.fire(response.message);
 				setTimeout(() => {
@@ -63,43 +55,29 @@ export const NewTeamScreen = () => {
 					>
 						<h4 style={{ color: 'white' }}>Crear Nuevo Equipo</h4>
 					</div>
-					<div
-						style={{
-							position: 'absolute',
-							top: '50%',
-							left: '50%',
-							transform: 'translate(-50%, -50%)',
-							borderColor: '#515D8A',
-						}}
-					>
-						<Card outline style={{ borderColor: '#515D8A' }}>
-							<CardBody>
-								<CardSubtitle className='mb-2 text-muted' tag='h6'>
-									Ingrese el nombre del equipo
-								</CardSubtitle>
-								<Input
-									bsSize='sm'
-									name='nombre'
-									onChange={handleInputChange}
-								/>
-								<CardSubtitle className='mb-2 mt-2 text-muted' tag='h6'>
-									Codigo del equipo
-								</CardSubtitle>
-								<Input
-									bsSize='sm'
-									name='codigo'
-									onChange={handleInputChange}
-								/>
-								<Button
-									className='my-2'
-									color='primary'
-									onClick={handleCreateTeam}
-								>
-									Crear
-								</Button>
-							</CardBody>
-						</Card>
-					</div>
+					<Form className='p-5'>
+						<FormGroup>
+							<Label>Email</Label>
+							<Input
+								name='name'
+								placeholder='with a placeholder'
+								type='text'
+								style={{ width: '25%' }}
+							/>
+						</FormGroup>
+						<FormGroup>
+							<Label for='examplePassword'>Password</Label>
+							<Input
+								value=''
+								type='number'
+								style={{ width: '25%' }}
+								disabled
+							/>
+						</FormGroup>
+						<Button color='success' onClick={handleCreateTeam}>
+							Crear
+						</Button>
+					</Form>
 				</main>
 			</div>
 		</>
