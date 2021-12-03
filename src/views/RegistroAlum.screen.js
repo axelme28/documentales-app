@@ -6,7 +6,6 @@ import { _altaUsuario } from '../api/index.api';
 import MainLayout from '../layout/MainLayout';
 import Swal from 'sweetalert2';
 
-
 const initialState = {
 	typeUser: 'alumno',
 	nombre: '',
@@ -20,9 +19,7 @@ const initialState = {
 };
 
 export const RegistroAlum = () => {
-	const [values, , handleInputChange,reset] = useForm(initialState);
-
-	console.log(values);
+	const [values, , handleInputChange, reset] = useForm(initialState);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -38,7 +35,6 @@ export const RegistroAlum = () => {
 				idRol,
 				idUniversidad,
 			} = values;
-			console.log(idRol);
 
 			const data = {
 				typeUser,
@@ -51,18 +47,14 @@ export const RegistroAlum = () => {
 				idRol,
 				idUniversidad,
 			};
-			console.log(data);
-			// const request =
 			const result = await _altaUsuario(data);
-			console.log(result);
-			// console.log(request);
-			if(result.msg === "Alumno creado correctamente") {
+			if (result.msg === 'Alumno creado correctamente') {
 				Swal.fire('!Alumno Registrado!');
 				reset();
 				setTimeout(() => {
 					window.location.reload();
 				}, 1500);
-			}else {
+			} else {
 				Swal.fire({
 					icon: 'error',
 					title: 'Hubo un error',

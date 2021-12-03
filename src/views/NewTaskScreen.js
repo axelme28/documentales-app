@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap';
 import { Sidebar } from '../components/Sidebar';
 
 export const NewTaskScreen = () => {
+	const [currentTeam, setCurrentTeam] = useState([]);
+
+	useEffect(() => {
+		if (currentTeam.length === 0) {
+			const localStorageTeams = JSON.parse(localStorage.getItem('teams'));
+			setCurrentTeam(localStorageTeams);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<div className='app'>
 			<Sidebar />
@@ -51,8 +61,10 @@ export const NewTaskScreen = () => {
 					<FormGroup>
 						<Label for='exampleSelect'>Equipo </Label>
 						<Input id='exampleSelect' name='select' type='select'>
-							<option>Equipo X</option>
-							<option>Equipo Y </option>
+							{currentTeam.length > 0 &&
+								currentTeam.map(({ nombre }) => (
+									<option>{nombre}</option>
+								))}
 						</Input>
 					</FormGroup>
 					<div className='d-flex justify-content-end mt-4'>

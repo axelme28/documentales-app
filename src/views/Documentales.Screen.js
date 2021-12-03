@@ -18,8 +18,6 @@ const DocumentalesScreen = () => {
 		optionsPagination,
 	} = useVerDocumentales();
 
-	console.log('documentales Screen');
-
 	return (
 		<>
 			{/* <Container

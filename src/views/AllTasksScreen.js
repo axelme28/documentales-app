@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Sidebar } from '../components/Sidebar';
 import Stack from '@mui/material/Stack';
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Button } from '@mui/material';
+import { _getAllTaskByUser } from '../api/index.api';
+import { objArray } from '../helpers/functions.helper';
 
 export const AllTasksScreen = () => {
 	const history = useHistory();
+
+	const [allTask, setAllTask] = useState([]);
+
+	useEffect(() => {
+		const { idUsu } = JSON.parse(localStorage.getItem('userInfo'));
+		handleGetAllTaskByUser(idUsu);
+	}, []);
+
+	const handleGetAllTaskByUser = async idUsu => {
+		try {
+			const res = await _getAllTaskByUser({ idUsu });
+			setAllTask(objArray(res[0]));
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	const handleNewTask = () => {
 		history.push('/nueva-tarea');
 	};
@@ -57,31 +76,15 @@ export const AllTasksScreen = () => {
 				</div>
 				<div className='d-flex justify-content-center'>
 					<Stack spacing={2} sx={{ maxWidth: 600 }} className='mt-4'>
-						<SnackbarContent
-							message='I love snacks.'
-							action={RecordTaskScreen}
-							style={styles.asignacion}
-						/>
-						<SnackbarContent
-							message={
-								'I love candy. I love cookies. I love cupcakes. \
-          I love cheesecake. I love chocolate.'
-							}
-							style={styles.asignacion}
-						/>
-						<SnackbarContent
-							message='I love candy. I love cookies. I love cupcakes.'
-							action={() => {}}
-							style={styles.asignacion}
-						/>
-						<SnackbarContent
-							message={
-								'I love candy. I love cookies. I love cupcakes. \
-          I love cheesecake. I love chocolate.'
-							}
-							action={() => {}}
-							style={styles.asignacion}
-						/>
+						{allTask.length > 0 &&
+							allTask.map(({ nombre }, i) => (
+								<SnackbarContent
+									key={i}
+									message={nombre}
+									action={RecordTaskScreen}
+									style={styles.asignacion}
+								/>
+							))}
 					</Stack>
 				</div>
 			</main>

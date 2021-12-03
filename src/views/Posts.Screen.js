@@ -6,12 +6,17 @@ import useForm from '../hooks/useForm';
 //post [{titulo,mensaje},]
 import icon from '../assets/icons/paper-plane (1).png';
 import { useCurrentTeam } from '../hooks/useCurrentTeam';
+
 //TODO: ponerle logica para que obtenga el id del usuario asi como el nombre del equipo e id del equipo
-const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-const { idUsu } = userInfo;
-const data = {
-	id_usuario: 0,
-	id_equipo: 0,
+
+const initialStateUser = {
+	apellido_materno: 'Perez',
+	apellido_paterno: 'Tito',
+	fecha_naci: '1990-01-03',
+	id: 9,
+	idUsu: 73,
+	no_trabajador: '00214',
+	nom_docente: 'Eton',
 };
 
 const initialState = {
@@ -24,29 +29,40 @@ export const PostsScreen = () => {
 	const [values, setValues, handleInputChange, reset] = useForm(initialState);
 	const [dataSentPost, setdataSentPost] = useState({});
 	const { CurrentTeam, setCurrentTeam } = useCurrentTeam();
-	const [DataPost, setDataPost] = useState(data);
+	const [usuario, setUsuario] = useState(initialStateUser);
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const { nombre, id, codigo } = CurrentTeam;
 
-	console.log(userInfo);
+	useEffect(() => {
+		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+		if (userInfo) {
+			setUsuario(userInfo);
+			console.log('si hay usuario');
+		}
+	}, []);
+
 	useEffect(() => {
 		getPost();
-	}, [nombre]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [CurrentTeam]);
 
 	// useEffect(() => {
 	// 	handleSendPublicacion();
 	// }, [dataSentPost]);
 
 	const getPost = async () => {
-		setDataPost({
-			id_usuario: idUsu,
-			id_equipo: id,
-		});
 		try {
-			const response = await _getPosts(DataPost);
-			console.log(response);
+			setIsLoading(true);
+			const params = {
+				id_equipo: usuario.id,
+				id_usuario: usuario.idUsu,
+			};
+			const response = await _getPosts(params);
 			const response2 = objArray(response);
 			setpost(response2);
+			setIsLoading(false);
 		} catch (error) {
 			console.log(error);
 		}
@@ -66,14 +82,13 @@ export const PostsScreen = () => {
 				});
 			} else {
 				setdataSentPost({
-					id_usuario: idUsu,
+					id_usuario: usuario.idUsu,
 					id_equipo: id,
 					titulo_publicacion,
 					texto_publicacion,
 					date,
 				});
 				const response = await _sendPublication(dataSentPost);
-				console.log(response);
 				if (response.ok === true) {
 					Swal.fire({
 						title: 'Exito',
@@ -102,8 +117,6 @@ export const PostsScreen = () => {
 
 		return arr;
 	};
-
-	console.log(Post);
 
 	return (
 		<>
@@ -134,7 +147,9 @@ export const PostsScreen = () => {
 							}}
 							className='posts m-3 py-4 shadow  '
 						>
-							{Post.length > 0 &&
+							{
+								//prettier-ignore
+								(isLoading===false && Post.length > 0) &&
 								Post.map(({ titulo, texto }) => (
 									<div
 										style={{
@@ -156,7 +171,8 @@ export const PostsScreen = () => {
 											</div>
 										</div>
 									</div>
-								))}
+								))
+							}
 						</div>
 						<div
 							className='d-flex align-items-center justify-content-center'

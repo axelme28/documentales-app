@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import back from '../assets/icons/arrow-small-left.png';
 import next from '../assets/icons/arrow-small-right.png';
 
+//TODO: controlar el regreso a login
 export const BackAndNext = () => {
 	const history = useHistory();
 	const goBack = () => {
@@ -11,6 +12,7 @@ export const BackAndNext = () => {
 	const goNext = () => {
 		history.goForward();
 	};
+
 	return (
 		<div className='d-flex justify-content-start'>
 			<button className='btn' onClick={goBack}>
