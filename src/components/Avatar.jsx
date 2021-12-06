@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { PLATAFORMA_MI_PERFIL } from '../constants/routes.constants';
 
 const initialStateUser = {
 	apellido_materno: 'Perez',
@@ -40,7 +41,7 @@ export const AvatarC = () => {
 		history.push('/plataforma/log-in');
 	};
 	const handleProfile = () => {
-		history.push('/mi-perfil');
+		history.push(PLATAFORMA_MI_PERFIL);
 	};
 
 	return (

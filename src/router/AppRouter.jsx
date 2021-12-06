@@ -15,6 +15,7 @@ import {
 	PLATAFORMA_NUEVA_TAREA,
 	PLATAFORMA_TAREA,
 	PLATAFORMA_CALIFICACIONES,
+	PLATAFORMA_MI_PERFIL,
 } from '../constants/routes.constants';
 import { LoginScreen } from '../views/LogInScreen';
 import DocumentalesScreen from '../views/Documentales.Screen';
@@ -29,6 +30,7 @@ import { NewTeamScreen } from '../views/NewTeamScreen';
 import { NewTaskScreen } from '../views/NewTaskScreen';
 import { AllTasksScreen } from '../views/AllTasksScreen';
 import { RecordingsScreen } from '../views/RecordingsScreen';
+import { MiPerfile } from '../views/MiPerfile';
 
 const AppRouter = () => {
 	return (
@@ -75,6 +77,8 @@ const AppRouter = () => {
 				<Route path={PLATAFORMA_TAREA} component={AllTasksScreen} />
 
 				<Route path={PLATAFORMA_CALIFICACIONES} component={RecordingsScreen} />
+
+				<Route path={PLATAFORMA_MI_PERFIL} component={MiPerfile} />
 
 				<Redirect to={LOG_IN} />
 			</Switch>

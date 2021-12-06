@@ -11,6 +11,7 @@ import {
 	GET_USER_INFO,
 	GET_TEAMS,
 	GET_ALL_TASK_BY_USER,
+	CREATE_TASK,
 } from '../constants/routes.constants';
 import { request, requestPlataforma } from './requestClient.api';
 
@@ -61,4 +62,8 @@ export const _getTeams = async data => {
 
 export const _getAllTaskByUser = async data => {
 	return await requestPlataforma(GET_ALL_TASK_BY_USER, 'POST', data);
+};
+
+export const _createTask = async data => {
+	return await requestPlataforma(CREATE_TASK, 'POST', data);
 };

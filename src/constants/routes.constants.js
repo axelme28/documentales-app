@@ -13,6 +13,7 @@ export const PLATAFORMA_NUEVO_EQUIPO = '/nuevo-equipo';
 export const PLATAFORMA_NUEVA_TAREA = '/nueva-tarea';
 export const PLATAFORMA_TAREA = '/tareas';
 export const PLATAFORMA_CALIFICACIONES = '/calificar-tarea';
+export const PLATAFORMA_MI_PERFIL = '/mi-perfil';
 
 export const PLATAFORMA_REGISTRAR_PROFESOR = '/plataforma/alta-profesor';
 export const PLATAFORMA_REGISTRAR_ALUMNOS = '/plataforma/alta-alumno';
@@ -41,3 +42,4 @@ export const POST_PUBLICACION = '/crear-publicacion';
 export const POST_REGISTRAR_TEAM = '/alta-equipo';
 export const GET_TEAMS = '/ver-grupos';
 export const GET_ALL_TASK_BY_USER = '/get-tasks';
+export const CREATE_TASK = '/create-task';

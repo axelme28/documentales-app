@@ -1,9 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap';
+import { _createTask } from '../api/index.api';
 import { Sidebar } from '../components/Sidebar';
+import useForm from '../hooks/useForm';
 
 export const NewTaskScreen = () => {
 	const [currentTeam, setCurrentTeam] = useState([]);
+	const [values, setValues, handleInputChange, reset] = useForm({});
+
+	const handleNewTask = async e => {
+		e.preventDefault();
+		const { nombre, instrucciones, tipoTarea } = values;
+		const newTask = {
+			nombre,
+			instrucciones,
+			idEquipo: 16,
+			tipoTarea,
+			fechaVencimiento: '2020-05-05',
+		};
+		try {
+			const response = await _createTask(newTask);
+			console.log(response);
+			reset();
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		if (currentTeam.length === 0) {
@@ -28,30 +50,40 @@ export const NewTaskScreen = () => {
 					<FormGroup>
 						<Label for='exampleEmail'>Titulo</Label>
 						<Input
-							name='email'
+							name='nombre'
 							placeholder='Titulo de la tarea  '
 							type='email'
 							style={styles.input}
+							onChange={handleInputChange}
 						/>
 					</FormGroup>
 					<FormGroup>
 						<Label for='exampleText'>Instrucciones</Label>
-						<Input id='exampleText' name='text' type='textarea' />
+						<Input
+							name='instrucciones'
+							type='textarea'
+							onChange={handleInputChange}
+						/>
 					</FormGroup>
 
 					<FormGroup>
 						<Label for='exampleDate'>Fecha de entrega</Label>
 						<Input
-							id='exampleDate'
 							name='date'
 							placeholder='fecha'
 							type='date'
+							onChange={() => {}}
 						/>
 					</FormGroup>
 
 					<FormGroup>
 						<Label for='exampleSelect'>Tipo de tarea </Label>
-						<Input id='exampleSelect' name='select' type='select'>
+						<Input
+							id='exampleSelect'
+							name='select'
+							type='select'
+							onChange={handleInputChange}
+						>
 							<option>Resumen</option>
 							<option>Informe</option>
 							<option>Cuestionario</option>
@@ -60,7 +92,13 @@ export const NewTaskScreen = () => {
 					</FormGroup>
 					<FormGroup>
 						<Label for='exampleSelect'>Equipo </Label>
-						<Input id='exampleSelect' name='select' type='select'>
+						<Input
+							id='exampleSelect'
+							name='idEquipo'
+							type='select'
+							onChange={handleInputChange}
+							value={currentTeam.id}
+						>
 							{currentTeam.length > 0 &&
 								currentTeam.map(({ nombre }) => (
 									<option>{nombre}</option>
@@ -71,7 +109,7 @@ export const NewTaskScreen = () => {
 						<Button
 							color='btn'
 							style={{ backgroundColor: '#515d8a', color: 'white' }}
-							onClick={() => {}}
+							onClick={handleNewTask}
 						>
 							Asignar
 						</Button>

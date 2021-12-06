@@ -9,16 +9,6 @@ import { useCurrentTeam } from '../hooks/useCurrentTeam';
 
 //TODO: ponerle logica para que obtenga el id del usuario asi como el nombre del equipo e id del equipo
 
-const initialStateUser = {
-	apellido_materno: 'Perez',
-	apellido_paterno: 'Tito',
-	fecha_naci: '1990-01-03',
-	id: 9,
-	idUsu: 73,
-	no_trabajador: '00214',
-	nom_docente: 'Eton',
-};
-
 const initialState = {
 	titulo_publicacion: '',
 	texto_publicacion: '',
@@ -29,7 +19,7 @@ export const PostsScreen = () => {
 	const [values, setValues, handleInputChange, reset] = useForm(initialState);
 	const [dataSentPost, setdataSentPost] = useState({});
 	const { CurrentTeam, setCurrentTeam } = useCurrentTeam();
-	const [usuario, setUsuario] = useState(initialStateUser);
+	const [usuario, setUsuario] = useState({});
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -52,11 +42,13 @@ export const PostsScreen = () => {
 	// 	handleSendPublicacion();
 	// }, [dataSentPost]);
 
+	console.log(values);
+
 	const getPost = async () => {
 		try {
 			setIsLoading(true);
 			const params = {
-				id_equipo: usuario.id,
+				id_equipo: CurrentTeam.id,
 				id_usuario: usuario.idUsu,
 			};
 			const response = await _getPosts(params);
@@ -73,6 +65,14 @@ export const PostsScreen = () => {
 		try {
 			const { titulo_publicacion, texto_publicacion, date } = values;
 
+			const params = {
+				titulo_publicacion,
+				texto_publicacion,
+				id_equipo: CurrentTeam.id,
+				id_usuario: usuario.idUsu,
+				date: date,
+			};
+
 			if (titulo_publicacion === '' || texto_publicacion === '') {
 				Swal.fire({
 					title: 'Error',
@@ -81,14 +81,7 @@ export const PostsScreen = () => {
 					confirmButtonText: 'Ok',
 				});
 			} else {
-				setdataSentPost({
-					id_usuario: usuario.idUsu,
-					id_equipo: id,
-					titulo_publicacion,
-					texto_publicacion,
-					date,
-				});
-				const response = await _sendPublication(dataSentPost);
+				const response = await _sendPublication(params);
 				if (response.ok === true) {
 					Swal.fire({
 						title: 'Exito',
@@ -96,6 +89,7 @@ export const PostsScreen = () => {
 						icon: 'success',
 						confirmButtonText: 'Ok',
 					});
+					reset();
 					getPost();
 				}
 			}
