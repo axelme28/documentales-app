@@ -1,12 +1,21 @@
 import React from 'react';
 import { Sidebar } from '../components/Sidebar';
+import { useCurrentTeam } from '../hooks/useCurrentTeam';
 
 export const MiPerfile = () => {
-	const { apellido_materno, apellido_paterno, fecha_naci, no_trabajador, nom_docente } =
-		JSON.parse(localStorage.getItem('userInfo'));
+	const { setCurrentTeam } = useCurrentTeam();
+	const {
+		apellido_materno,
+		apellido_paterno,
+		fecha_naci,
+		no_trabajador,
+		nombre,
+		typeUser,
+		boleta,
+	} = JSON.parse(localStorage.getItem('userInfo'));
 	return (
 		<div className='app'>
-			<Sidebar />
+			<Sidebar setCurrentTeam={setCurrentTeam} />
 			<main className='appMain' style={{ position: 'relative' }}>
 				<div
 					className='d-flex justify-content-center'
@@ -26,7 +35,7 @@ export const MiPerfile = () => {
 												<input
 													type='text'
 													className='form-control'
-													value={nom_docente}
+													value={nombre}
 													disabled
 												/>
 											</div>
@@ -55,30 +64,31 @@ export const MiPerfile = () => {
 												/>
 											</div>
 										</div>
-										<div className='col-md-6'>
-											<div className='form-group'>
-												<label>Fecha de Nacimiento</label>
-												<input
-													type='text'
-													className='form-control'
-													value={fecha_naci}
-													disabled
-												/>
+										{typeUser === 'profesor' ? (
+											<div className='col-md-6'>
+												<div className='form-group'>
+													<label>Numero de trabanjador</label>
+													<input
+														type='text'
+														className='form-control'
+														value={no_trabajador}
+														disabled
+													/>
+												</div>
 											</div>
-										</div>
-									</div>
-									<div className='row'>
-										<div className='col-md-6'>
-											<div className='form-group'>
-												<label>No. Trabajador</label>
-												<input
-													type='text'
-													className='form-control'
-													value={no_trabajador}
-													disabled
-												/>
+										) : (
+											<div className='col-md-6'>
+												<div className='form-group'>
+													<label>Numero de boleta</label>
+													<input
+														type='text'
+														className='form-control'
+														value={boleta}
+														disabled
+													/>
+												</div>
 											</div>
-										</div>
+										)}
 									</div>
 								</div>
 							</div>

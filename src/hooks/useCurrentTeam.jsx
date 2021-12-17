@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 
 export const useCurrentTeam = () => {
-    const [CurrentTeam, setCurrentTeam] = useState({})
-    return {CurrentTeam, setCurrentTeam}
-}
+	const [CurrentTeam, setCurrentTeam] = useState({});
+	return { CurrentTeam, setCurrentTeam };
+};

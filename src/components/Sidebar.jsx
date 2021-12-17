@@ -5,13 +5,11 @@ import { Link } from 'react-router-dom';
 import iconDoc from '../assets/icons/film.png';
 import iconTarea from '../assets/icons/book.png';
 import backgroud from '../assets/imgs/background4.png';
-// import sidebarIcon from '../assets/icons/sidebar.png';
 import teams from '../assets/icons/icon-teams.png';
-// import { height } from '@mui/system';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { _getTeams } from '../api/index.api';
 import { BackAndNext } from './BackAndNext';
 import { AvatarC } from './Avatar';
+import { PLATAFORMA_JOIN_TEAM } from '../constants/routes.constants';
 
 const initialStateUser = {
 	apellido_materno: 'Perez',
@@ -24,9 +22,8 @@ const initialStateUser = {
 };
 
 export const Sidebar = ({ setCurrentTeam }) => {
-	const history = useHistory();
 	const [Teams, setTeams] = useState({});
-	const [usuario, setUsuario] = useState(initialStateUser);
+	const [usuario, setUsuario] = useState({});
 
 	useEffect(() => {
 		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -35,25 +32,20 @@ export const Sidebar = ({ setCurrentTeam }) => {
 		}
 	}, []);
 
+	const { typeUser } = usuario;
+
 	useEffect(() => {
 		getTeams();
 	}, []);
-
-	const handleLogOut = () => {
-		localStorage.clear();
-		history.push('/login');
-	};
 
 	const getTeams = async () => {
 		try {
 			const idUsuario = usuario.idUsu;
 			const data = { idUsuario };
+			console.log('data', data);
 			const response = await _getTeams(data);
-			if (JSON.stringify(response) !== JSON.stringify(Teams)) {
-				setTeams(response);
-				const teamsStr = JSON.stringify(objArray(response));
-				localStorage.setItem('teams', teamsStr);
-			}
+
+			setTeams(response);
 		} catch (error) {
 			console.log(error);
 		}
@@ -71,7 +63,6 @@ export const Sidebar = ({ setCurrentTeam }) => {
 
 	return (
 		<>
-			{/* <div className='app '>  */}
 			<ProSidebar
 				style={{ height: '773px', color: 'black' }}
 				className='shadow-lg bg-white rounded'
@@ -88,7 +79,7 @@ export const Sidebar = ({ setCurrentTeam }) => {
 							marginTop: -10,
 						}}
 					>
-						Profesor
+						{typeUser === 'profesor' ? 'Docente' : 'Estudiante'}
 					</h4>
 
 					<BackAndNext />
@@ -134,14 +125,20 @@ export const Sidebar = ({ setCurrentTeam }) => {
 									</MenuItem>
 								);
 							})}
-							<MenuItem>
-								Nuevo equipo
-								<Link to='/nuevo-equipo' />
-							</MenuItem>
+							{typeUser === 'profesor' ? (
+								<MenuItem>
+									Nuevo equipo
+									<Link to='/nuevo-equipo' />
+								</MenuItem>
+							) : (
+								<MenuItem>
+									Unirse a un equipo
+									<Link to='/unirse-equipo' />
+								</MenuItem>
+							)}
 						</SubMenu>
 					</div>
 				</Menu>
-
 				<div className='d-flex justify-content-start align-items-start ml-4'>
 					<AvatarC />
 				</div>

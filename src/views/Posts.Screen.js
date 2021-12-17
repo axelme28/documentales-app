@@ -16,14 +16,13 @@ const initialState = {
 };
 export const PostsScreen = () => {
 	const [Post, setpost] = useState([]);
-	const [values, setValues, handleInputChange, reset] = useForm(initialState);
-	const [dataSentPost, setdataSentPost] = useState({});
+	const [values, , handleInputChange, reset] = useForm(initialState);
 	const { CurrentTeam, setCurrentTeam } = useCurrentTeam();
 	const [usuario, setUsuario] = useState({});
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const { nombre, id, codigo } = CurrentTeam;
+	const { nombre, codigo } = CurrentTeam;
 
 	useEffect(() => {
 		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -123,6 +122,10 @@ export const PostsScreen = () => {
 						style={{ backgroundColor: '#515D8A', color: 'white', height: 29 }}
 					>
 						<h4>Publicaciones</h4>
+					</div>
+
+					<div className='d-flex justify-content-end mt-2'>
+						<h5>Codigo del equipo: {codigo}</h5>
 					</div>
 
 					<div

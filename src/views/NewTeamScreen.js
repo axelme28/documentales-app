@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 //prettier ignore
 import { Form, FormGroup, Input, Label, Button } from 'reactstrap';
 import { Sidebar } from '../components/Sidebar';
-import { _getTeams, _postRegistrarTeam } from '../api/index.api';
+import { _postRegistrarTeam } from '../api/index.api';
 import useForm from '../hooks/useForm';
 import Swal from 'sweetalert2';
 import { useCurrentTeam } from '../hooks/useCurrentTeam';
@@ -13,20 +13,31 @@ const initialState = {
 	idUsuario: 0,
 };
 
+const generateCode = () => {
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+		var r = (Math.random() * 16) | 0,
+			v = c === 'x' ? r : (r & 0x3) | 0x8;
+		return v.toString(16);
+	});
+};
+
 export const NewTeamScreen = () => {
-	const [values, , handleInputChange, reset] = useForm(initialState);
+	const [values, , handleInputChange] = useForm(initialState);
 	const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 	const { idUsu } = userInfo;
 	const { setCurrentTeam } = useCurrentTeam();
 	const [Code, setCode] = useState('');
 
-	//TODO: autogenerar el codigo del equipo
+	useEffect(() => {
+		setCode(generateCode());
+	}, []);
+
 	const handleCreateTeam = async () => {
 		try {
-			const { nombre, codigo, idUsuario } = values;
+			const { nombre, codigo } = values;
 			const data = {
 				nombre,
-				codigo,
+				codigo: Code,
 				idUsuario: idUsu,
 			};
 			const response = await _postRegistrarTeam(data);
@@ -47,7 +58,7 @@ export const NewTeamScreen = () => {
 	return (
 		<>
 			<div className='app '>
-				<Sidebar setCurrentTeam={setCurrentTeam} />
+				<Sidebar setCurrentTeam={setCurrentTeam} key={idUsu} />
 				<main className='appMain' style={{ position: 'relative' }}>
 					<div
 						className='d-flex justify-content-center'
@@ -57,21 +68,24 @@ export const NewTeamScreen = () => {
 					</div>
 					<Form className='p-5'>
 						<FormGroup>
-							<Label>Email</Label>
+							<Label>Nombre</Label>
 							<Input
-								name='name'
-								placeholder='with a placeholder'
+								name='nombre'
+								placeholder='nombre del equipo'
 								type='text'
 								style={{ width: '25%' }}
+								onChange={handleInputChange}
 							/>
 						</FormGroup>
 						<FormGroup>
-							<Label for='examplePassword'>Password</Label>
+							<Label for='examplePassword'>Codigo</Label>
 							<Input
-								value=''
-								type='number'
-								style={{ width: '25%' }}
+								value={Code}
+								style={{ width: '32%' }}
 								disabled
+								name='codigo'
+								type='text'
+								onChange={handleInputChange}
 							/>
 						</FormGroup>
 						<Button color='success' onClick={handleCreateTeam}>

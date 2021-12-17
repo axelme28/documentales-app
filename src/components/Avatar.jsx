@@ -17,14 +17,15 @@ const initialStateUser = {
 	nom_docente: 'Eton',
 };
 
+const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
 export const AvatarC = () => {
 	const history = useHistory();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [usuario, setUsuario] = useState(initialStateUser);
 
 	useEffect(() => {
-		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-		if (userInfo) {
+		if (userInfo.length > 0) {
 			setUsuario(userInfo);
 		}
 	}, []);
@@ -55,7 +56,7 @@ export const AvatarC = () => {
 			>
 				<div className='d-flex justufy-content-center'>
 					<Avatar sx={{ bgcolor: deepPurple[500] }}>
-						{usuario.nom_docente.charAt(0)}
+						{usuario.length > 0 && usuario.nombre.charAt(0)}
 					</Avatar>
 					<h6 className='mt-2 ml-2' style={{ color: 'black' }}>
 						Mi perfil

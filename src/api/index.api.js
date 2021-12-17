@@ -12,6 +12,7 @@ import {
 	GET_TEAMS,
 	GET_ALL_TASK_BY_USER,
 	CREATE_TASK,
+	JOIN_TEAM,
 } from '../constants/routes.constants';
 import { request, requestPlataforma } from './requestClient.api';
 
@@ -53,7 +54,52 @@ export const _postRegistrarTeam = async data => {
 };
 
 export const _getUserInfo = async data => {
-	return await requestPlataforma(GET_USER_INFO, 'POST', data);
+	let obj = {};
+	const { typeUser } = data;
+	const result = await requestPlataforma(GET_USER_INFO, 'POST', data);
+
+	if (typeUser === 'admin') {
+		obj = {};
+	}
+	if (typeUser === 'profesor') {
+		console.log('result', result);
+		const {
+			id,
+			nom_docente,
+			apellido_materno,
+			idUsu,
+			no_trabajador,
+			apellido_paterno,
+		} = result;
+
+		obj = {
+			nombre: nom_docente,
+			apellido_paterno,
+			apellido_materno,
+			no_trabajador,
+			id,
+			idUsu,
+			typeUser,
+			boleta: '0',
+		};
+	}
+	if (typeUser === 'alumno') {
+		const { apellido_materno, apellido_paterno, boleta, id, idUsu, nom_alumno } =
+			result;
+
+		obj = {
+			nombre: nom_alumno,
+			apellido_paterno,
+			apellido_materno,
+			boleta,
+			id,
+			idUsu,
+			no_trabajador: 0,
+			typeUser,
+		};
+	}
+
+	return obj;
 };
 
 export const _getTeams = async data => {
@@ -66,4 +112,8 @@ export const _getAllTaskByUser = async data => {
 
 export const _createTask = async data => {
 	return await requestPlataforma(CREATE_TASK, 'POST', data);
+};
+
+export const _joinTeam = async data => {
+	return await requestPlataforma(JOIN_TEAM, 'POST', data);
 };

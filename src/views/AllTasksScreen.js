@@ -6,15 +6,24 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Button } from '@mui/material';
 import { _getAllTaskByUser } from '../api/index.api';
 import { objArray } from '../helpers/functions.helper';
+import { PLATAFORMA_ADD_HOMEWORK } from '../constants/routes.constants';
+import { useCurrentTeam } from '../hooks/useCurrentTeam';
 
 export const AllTasksScreen = () => {
 	const history = useHistory();
+	const [userInfo, setuserInfo] = useState({});
+	const { setCurrentTeam } = useCurrentTeam();
 
 	const [allTask, setAllTask] = useState([]);
 
 	useEffect(() => {
-		const { idUsu } = JSON.parse(localStorage.getItem('userInfo'));
+		const { idUsu, typeUser } = JSON.parse(localStorage.getItem('userInfo'));
 		handleGetAllTaskByUser(idUsu);
+		if (typeUser) {
+			setuserInfo({
+				typeUser,
+			});
+		}
 	}, []);
 
 	const handleGetAllTaskByUser = async idUsu => {
@@ -42,9 +51,21 @@ export const AllTasksScreen = () => {
 		</Button>
 	);
 
+	const AddtaskScreen = (
+		<Button
+			color='secondary'
+			size='small'
+			onClick={() => {
+				history.push(PLATAFORMA_ADD_HOMEWORK);
+			}}
+		>
+			Entregar tarea
+		</Button>
+	);
+
 	return (
 		<div className='app'>
-			<Sidebar />
+			<Sidebar setCurrentTeam={setCurrentTeam} />
 			<main
 				className='appMain'
 				style={{ position: 'relative', backgroundColor: '#F0F1F7' }}
@@ -65,14 +86,17 @@ export const AllTasksScreen = () => {
 					>
 						Asignadas
 					</h5>
-
-					<button
-						className='btn '
-						style={{ backgroundColor: '#555d8b', color: 'white' }}
-						onClick={handleNewTask}
-					>
-						Nueva tarea
-					</button>
+					{userInfo.typeUser === 'profesor' ? (
+						<button
+							className='btn '
+							style={{ backgroundColor: '#555d8b', color: 'white' }}
+							onClick={handleNewTask}
+						>
+							Nueva tarea
+						</button>
+					) : (
+						<h1></h1>
+					)}
 				</div>
 				<div className='d-flex justify-content-center'>
 					<Stack spacing={2} sx={{ maxWidth: 600 }} className='mt-4'>
@@ -81,7 +105,11 @@ export const AllTasksScreen = () => {
 								<SnackbarContent
 									key={i}
 									message={nombre}
-									action={RecordTaskScreen}
+									action={
+										userInfo.typeUser === 'profesor'
+											? RecordTaskScreen
+											: AddtaskScreen
+									}
 									style={styles.asignacion}
 								/>
 							))}

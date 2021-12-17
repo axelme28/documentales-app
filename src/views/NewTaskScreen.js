@@ -1,31 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import Swal from 'sweetalert2';
 import { _createTask } from '../api/index.api';
 import { Sidebar } from '../components/Sidebar';
 import useForm from '../hooks/useForm';
 
 export const NewTaskScreen = () => {
 	const [currentTeam, setCurrentTeam] = useState([]);
-	const [values, setValues, handleInputChange, reset] = useForm({});
-
-	const handleNewTask = async e => {
-		e.preventDefault();
-		const { nombre, instrucciones, tipoTarea } = values;
-		const newTask = {
-			nombre,
-			instrucciones,
-			idEquipo: 16,
-			tipoTarea,
-			fechaVencimiento: '2020-05-05',
-		};
-		try {
-			const response = await _createTask(newTask);
-			console.log(response);
-			reset();
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	const [values, , handleInputChange, reset] = useForm({});
+	const [idteam, setidteam] = useState(0);
 
 	useEffect(() => {
 		if (currentTeam.length === 0) {
@@ -35,6 +18,31 @@ export const NewTaskScreen = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const handleNewTask = async e => {
+		e.preventDefault();
+		const { nombre, instrucciones, equipo, tipoTarea, fechaVencimiento } = values;
+		const newTask = {
+			nombre,
+			instrucciones,
+			equipo,
+			tipoTarea,
+			fechaVencimiento,
+		};
+		try {
+			const response = await _createTask(newTask);
+			if (response.ok) {
+				Swal.fire(response.message);
+				setTimeout(() => {
+					window.location.reload();
+				}, 2000);
+			} else {
+				Swal.fire(response.message);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	console.log(values);
 	return (
 		<div className='app'>
 			<Sidebar />
@@ -52,7 +60,7 @@ export const NewTaskScreen = () => {
 						<Input
 							name='nombre'
 							placeholder='Titulo de la tarea  '
-							type='email'
+							type='text'
 							style={styles.input}
 							onChange={handleInputChange}
 						/>
@@ -69,18 +77,17 @@ export const NewTaskScreen = () => {
 					<FormGroup>
 						<Label for='exampleDate'>Fecha de entrega</Label>
 						<Input
-							name='date'
-							placeholder='fecha'
+							name='fechaVencimiento'
+							placeholder='fechaVencimiento'
 							type='date'
-							onChange={() => {}}
+							onChange={handleInputChange}
 						/>
 					</FormGroup>
 
 					<FormGroup>
 						<Label for='exampleSelect'>Tipo de tarea </Label>
 						<Input
-							id='exampleSelect'
-							name='select'
+							name='tipoTarea'
 							type='select'
 							onChange={handleInputChange}
 						>
@@ -92,17 +99,9 @@ export const NewTaskScreen = () => {
 					</FormGroup>
 					<FormGroup>
 						<Label for='exampleSelect'>Equipo </Label>
-						<Input
-							id='exampleSelect'
-							name='idEquipo'
-							type='select'
-							onChange={handleInputChange}
-							value={currentTeam.id}
-						>
+						<Input name='equipo' type='select' onChange={handleInputChange}>
 							{currentTeam.length > 0 &&
-								currentTeam.map(({ nombre }) => (
-									<option>{nombre}</option>
-								))}
+								currentTeam.map(team => <option>{team.nombre}</option>)}
 						</Input>
 					</FormGroup>
 					<div className='d-flex justify-content-end mt-4'>

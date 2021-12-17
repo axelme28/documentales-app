@@ -15,15 +15,14 @@ import VideoContentYT from 'react-video-content-youtube';
 
 import triangulo from '../assets/imgs/caret-right (1).png';
 import { _verDocumentales } from '../api/index.api';
-import MainLayout from '../layout/MainLayout';
 import { Sidebar } from '../components/Sidebar';
-import {useCurrentTeam} from '../hooks/useCurrentTeam.jsx'
+import { useCurrentTeam } from '../hooks/useCurrentTeam.jsx';
 
 export const Vistagaleriascreen = () => {
 	const [documentales, setDocumentales] = useState([]);
 	const [viewPlay, setViewPlay] = useState(false);
 	const [urlVideo, setUrlVideo] = useState('');
-	const {setCurrentTeam} = useCurrentTeam();
+	const { setCurrentTeam } = useCurrentTeam();
 
 	useEffect(() => {
 		getDocumentales();
@@ -51,7 +50,7 @@ export const Vistagaleriascreen = () => {
 	return (
 		<>
 			<div className='app '>
-				<Sidebar setCurrentTeam={setCurrentTeam}/>
+				<Sidebar setCurrentTeam={setCurrentTeam} />
 				<main className=' container'>
 					<section className='fondochingon d-flex justify-content-center align-items-center'>
 						<Container className=' d-flex justify-content-center align-items-center'>

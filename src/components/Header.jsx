@@ -14,12 +14,11 @@ const Header = () => {
 	const [toggleDropDown, setToggleDropDown] = useState(false);
 
 	return (
-		<nav className='navbar navbar-expand-sm  p-3' id='barrita'>
-			<Link
-				className='navbar-brand'
-				to='/videos'
-				style={{ color: 'darkslateblue' }}
-			>
+		<nav
+			className='navbar navbar-expand-sm  p-3'
+			style={{ backgroundColor: '#515D8A' }}
+		>
+			<Link className='navbar-brand' to='/videos' style={{ color: 'white' }}>
 				Documentales
 			</Link>
 
@@ -30,6 +29,7 @@ const Header = () => {
 						className='nav-item nav-link'
 						exact
 						to={ADMINISTRADOR_DOCUMENTALES_VIEW}
+						style={{ color: 'white' }}
 					>
 						Ver Documentales
 					</NavLink>
@@ -38,8 +38,16 @@ const Header = () => {
 						className='ml-3'
 						toggle={() => setToggleDropDown(!toggleDropDown)}
 						isOpen={toggleDropDown}
+						// style={{ backgroundColor: 'white' }}
 					>
-						<DropdownToggle caret style={styles.dropdown}>
+						<DropdownToggle
+							caret
+							style={{
+								backgroundColor: 'white',
+								color: '#515D8A',
+								fontWeight: 'bold',
+							}}
+						>
 							Registrar
 						</DropdownToggle>
 						<DropdownMenu>
